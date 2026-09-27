@@ -1,0 +1,36 @@
+.venv/
+
+__pycache__/
+
+*.pyc
+
+.env
+
+*.db
+
+output/*.csv
+# Raw data — large source files, not code
+data/raw/*.xlsx
+data/processed/
+
+# Database — generated file, not source
+db/*.db
+db/nifty100.db
+
+# Keep schema tracked
+!db/schema.sql
+
+# Streamlit
+.streamlit/secrets.toml
+
+# Local database
+*.db
+*.db-journal
+
+# Temporary files
+*.log
+.ipynb_checkpoints/
+~$*.xlsx
+
+# Generated reports
+reports/radar_charts/

@@ -1,0 +1,145 @@
+filters:
+  asset_turnover_min:
+    column: asset_turnover
+    default: 0.5
+    operator: '>'
+  de_max:
+    column: debt_to_equity
+    default: 1
+    operator: <
+  debt_to_equity:
+    max: 5.0
+  dividend_yield_min:
+    column: dividend_yield_pct
+    default: 1
+    operator: '>'
+  eps_cagr_min:
+    column: eps_cagr_5yr
+    default: 10
+    operator: '>'
+  fcf_min:
+    column: free_cash_flow_cr
+    default: 0
+    operator: '>'
+  icr_min:
+    column: interest_coverage
+    default: 3
+    operator: '>'
+  market_cap_min:
+    column: market_cap_crore
+    default: 10000
+    operator: '>'
+  net_profit_min:
+    column: net_profit_cr
+    default: 0
+    operator: '>'
+  opm_min:
+    column: operating_profit_margin_pct
+    default: 10
+    operator: '>'
+  pat_cagr_min:
+    column: pat_cagr_5yr
+    default: 10
+    operator: '>'
+  pb_max:
+    column: pb_ratio
+    default: 3
+    operator: <
+  pe_max:
+    column: pe_ratio
+    default: 20
+    operator: <
+  revenue_cagr_min:
+    column: revenue_cagr_5yr
+    default: 10
+    operator: '>'
+  roe_min:
+    column: return_on_equity_pct
+    default: 15
+    operator: '>'
+  sales_min:
+    column: sales_cr
+    default: 1000
+    operator: '>'
+presets:
+  Debt-Free Blue Chip:
+    filters:
+    - column: debt_to_equity
+      operator: lt
+      value: 0.05
+    - column: return_on_equity_pct
+      operator: gt
+      value: 18
+    - column: market_cap_crore
+      operator: gt
+      value: 15000
+    sort_by: return_on_equity_pct
+    sort_order: desc
+  Dividend Champion:
+    filters:
+    - column: dividend_yield_pct
+      operator: gt
+      value: 2
+    - column: dividend_payout_ratio_pct
+      operator: lt
+      value: 80
+    - column: free_cash_flow_cr
+      operator: gt
+      value: 0
+    sort_by: dividend_yield_pct
+    sort_order: desc
+  Growth Accelerator:
+    filters:
+    - column: pat_cagr_5yr
+      operator: gt
+      value: 20
+    - column: revenue_cagr_5yr
+      operator: gt
+      value: 15
+    - column: debt_to_equity
+      operator: lt
+      value: 2
+    sort_by: pat_cagr_5yr
+    sort_order: desc
+  Quality Compounder:
+    filters:
+    - column: return_on_equity_pct
+      operator: gt
+      value: 15
+    - column: debt_to_equity
+      operator: lt
+      value: 1
+    - column: free_cash_flow_cr
+      operator: gt
+      value: 0
+    - column: revenue_cagr_5yr
+      operator: gt
+      value: 10
+    sort_by: return_on_equity_pct
+    sort_order: desc
+  Turnaround Watch:
+    filters:
+    - column: revenue_cagr_5yr
+      operator: gt
+      value: 10
+    - column: free_cash_flow_cr
+      operator: gt
+      value: 0
+    sort_by: revenue_cagr_5yr
+    sort_order: desc
+  Value Pick:
+    filters:
+    - column: pe_ratio
+      operator: lt
+      value: 30
+    - column: pb_ratio
+      operator: lt
+      value: 5
+    - column: debt_to_equity
+      operator: lt
+      value: 3
+    - column: dividend_yield_pct
+      operator: gt
+      value: 0
+    sort_by: pe_ratio
+    sort_order: asc

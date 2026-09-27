@@ -1,0 +1,17 @@
+pandas
+openpyxl
+numpy
+sqlalchemy
+python-dotenv
+pytest
+pytest-cov
+jupyter
+matplotlib
+seaborn
+plotly
+fastapi
+uvicorn
+streamlit
+pydantic
+requests
+python-dateutil

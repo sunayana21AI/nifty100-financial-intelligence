@@ -1,0 +1,31 @@
+filters:
+  asset_turnover_min:
+    min: 0.5
+  debt_to_equity:
+    max: 10.0
+  dividend_yield_min:
+    min: 0
+  eps_cagr_min:
+    min: 5
+  fcf_min:
+    min: 0
+  icr_min:
+    min: 1
+  market_cap_min:
+    min: 1000
+  net_profit_min:
+    min: 10
+  opm_min:
+    min: 10
+  pat_cagr_min:
+    min: 5
+  pb_max:
+    max: 10
+  pe_max:
+    max: 50
+  revenue_cagr_min:
+    min: 5
+  roe_min:
+    min: 15
+  sales_min:
+    min: 100
