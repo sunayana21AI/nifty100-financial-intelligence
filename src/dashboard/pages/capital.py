@@ -1,105 +1,72 @@
-"""
-pages/capital.py
-Capital Allocation Map - Treemap of companies
-"""
-
-import streamlit as st
-import pandas as pd
-import plotly.express as px
 import sys
 from pathlib import Path
+ROOT = Path(__file__).resolve().parents[3]
+sys.path.insert(0, str(ROOT / "src"))
 
-sys.path.insert(0, str(Path(__file__).parent.parent.parent.parent))
+import pandas as pd
+import streamlit as st
+import plotly.express as px
+from dashboard.utils.db import get_all_ratios_latest, OUTPUT_DIR
 
-from src.dashboard.utils import db
+st.set_page_config(page_title="Capital", page_icon="💰", layout="wide")
+st.title("💰 Capital Allocation")
 
+# ---------- Try CSV first, but handle empty ----------
+cap_path = OUTPUT_DIR / "capital_allocation.csv"
+df = None
 
-def show():
-    st.markdown('<div class="main-header">💰 Capital Allocation</div>', unsafe_allow_html=True)
-    st.markdown('<div class="sub-header">Visualize companies by capital allocation patterns</div>', unsafe_allow_html=True)
-    
-    # Get data
-    df = db.get_all_valuation()
-    sectors = db.get_sectors()
-    
-    if df.empty:
-        st.warning("No data available")
-        return
-    
-    # Merge with sectors
-    df = df.merge(sectors, left_on='company_id', right_on='ticker', how='left')
-    
-    # Fix column names after merge
-    if 'broad_sector_x' in df.columns:
-        df['broad_sector'] = df['broad_sector_x']
-    elif 'broad_sector_y' in df.columns:
-        df['broad_sector'] = df['broad_sector_y']
-    
-    # Create capital allocation categories based on metrics
-    def get_capital_pattern(row):
-        roe = row.get('return_on_equity_pct', 0)
-        de = row.get('debt_to_equity', 0)
-        fcf = row.get('free_cash_flow_cr', 0)
-        
-        if pd.isna(roe) or pd.isna(de) or pd.isna(fcf):
-            return 'Unknown'
-        
-        if roe > 20 and de < 0.5:
-            return 'Quality Compounders'
-        elif roe > 15 and fcf > 0:
-            return 'Cash Generators'
-        elif de > 2:
-            return 'Leveraged'
-        elif roe < 10:
-            return 'Low Returns'
-        else:
-            return 'Balanced'
-    
-    df['capital_pattern'] = df.apply(get_capital_pattern, axis=1)
-    
-    # Treemap
-    st.subheader("📊 Capital Allocation Treemap")
-    
-    # Ensure we have the required columns
-    if 'broad_sector' not in df.columns:
-        st.warning("Sector data not available")
-        return
-    
-    if df['broad_sector'].dropna().empty:
-        st.warning("No sector data available for treemap")
-        return
-    
-    fig = px.treemap(
-        df,
-        path=['broad_sector', 'capital_pattern', 'company_name'],
-        values='market_cap_crore',
-        color='return_on_equity_pct',
-        color_continuous_scale='RdYlGn',
-        title='Companies by Sector, Capital Pattern, and ROE'
-    )
-    fig.update_layout(height=600)
+if cap_path.exists() and cap_path.stat().st_size > 20:
+    try:
+        df = pd.read_csv(cap_path)
+        if df.empty or len(df.columns) == 0:
+            df = None
+    except Exception:
+        df = None
+
+# ---------- Fallback: derive from ratios ----------
+if df is None:
+    st.info("📊 Using D/E-based capital pattern classification (CSV was empty).")
+    data = get_all_ratios_latest()
+
+    if data.empty:
+        st.error("No data available.")
+        st.stop()
+
+    de = pd.to_numeric(data["debt_to_equity"], errors="coerce").fillna(0)
+
+    def cat(v):
+        if v <= 0.1:  return "Debt-Free"
+        if v <= 0.5:  return "Low Debt"
+        if v <= 1.5:  return "Moderate Debt"
+        return "High Debt"
+
+    data["Capital Pattern"] = de.apply(cat)
+    df = (data["Capital Pattern"].value_counts()
+          .reset_index()
+          .rename(columns={"index": "Pattern", "Capital Pattern": "Pattern"}))
+    df.columns = ["Pattern", "Count"]
+
+# ---------- Display count table ----------
+st.subheader("Capital Allocation Patterns")
+st.dataframe(df, use_container_width=True, hide_index=True)
+
+# ---------- Treemap ----------
+label_col = df.columns[0]
+value_col = df.columns[1] if len(df.columns) > 1 else None
+
+if value_col:
+    fig = px.treemap(df, path=[label_col], values=value_col,
+                     title="Capital Allocation Patterns")
+    fig.update_traces(textinfo="label+value+percent root")
     st.plotly_chart(fig, use_container_width=True)
-    
-    # Pattern breakdown
-    st.subheader("📊 Capital Pattern Breakdown")
-    
-    pattern_counts = df['capital_pattern'].value_counts().reset_index()
-    pattern_counts.columns = ['Pattern', 'Count']
-    
-    st.dataframe(pattern_counts, use_container_width=True, hide_index=True)
-    
-    # Show companies by pattern
-    if not pattern_counts.empty:
-        selected_pattern = st.selectbox("Select Pattern to View Companies", pattern_counts['Pattern'].tolist())
-        
-        if selected_pattern:
-            pattern_df = df[df['capital_pattern'] == selected_pattern]
-            display_cols = ['company_name', 'company_id', 'broad_sector', 'return_on_equity_pct', 'debt_to_equity', 'free_cash_flow_cr']
-            display_cols = [c for c in display_cols if c in pattern_df.columns]
-            st.dataframe(pattern_df[display_cols], use_container_width=True, hide_index=True)
-    else:
-        st.info("No capital pattern data available")
 
-
-if __name__ == "__main__":
-    show()
+# ---------- Show companies per pattern (if fallback) ----------
+if "data" in dir() and "Capital Pattern" in data.columns:
+    st.markdown("---")
+    st.subheader("Companies by Pattern")
+    pattern = st.selectbox("Select Pattern", sorted(data["Capital Pattern"].unique()))
+    subset = data[data["Capital Pattern"] == pattern][
+        ["company_id", "company_name", "sector", "debt_to_equity", "roe"]
+    ].dropna(how="all")
+    st.dataframe(subset, use_container_width=True, hide_index=True)
+    st.caption(f"Total: {len(subset)} companies in {pattern}")
