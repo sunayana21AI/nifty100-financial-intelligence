@@ -1,19 +1,29 @@
-# 📊 Nifty 100 Analytics Dashboard
+# 📊 Dashboard Pages — Documentation
 
-End-to-end financial analytics platform for Nifty 100 companies — from raw Excel data to an interactive 8-screen Streamlit dashboard with valuation flags.
+This folder contains the 8 Streamlit screens for the Nifty 100 Analytics dashboard.
 
-**Sprint 4 Complete** ✅
+Each file is a **standalone Streamlit script** — auto-detected by Streamlit's multipage system.
 
 ---
 
-## 🚀 Quick Start
+## 📁 Files in this folder
+
+| File | Screen | Description |
+|------|--------|-------------|
+| `01_home.py` | 🏠 Home | Overall KPIs, sector donut, top composite scores |
+| `02_profile.py` | 🏢 Company Profile | Search + KPIs + charts + pros/cons |
+| `03_screener.py` | 🔎 Screener | Sliders, presets, CSV export |
+| `04_peers.py` | 👥 Peer Comparison | Radar chart + comparison table |
+| `05_trends.py` | 📈 Trend Analysis | Multi-metric 10-year trends |
+| `06_sectors.py` | 🗂️ Sector Analysis | Bubble chart + median bar |
+| `07_capital.py` | 💰 Capital Allocation | D/E pattern treemap |
+| `08_reports.py` | 📄 Reports | Annual report PDF links |
+
+---
+
+## 🚀 How to Run
+
+From **project root** (`nifty100_Project/`):
 
 ```bash
-# 1. Install dependencies
-pip install -r requirements.txt
-
-# 2. Generate valuation outputs (optional — already exists)
-python src/analytics/valuation.py
-
-# 3. Launch dashboard
 streamlit run src/dashboard/app.py
