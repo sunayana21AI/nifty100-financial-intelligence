@@ -118,3 +118,10 @@ htmlcov/
 # Notebooks (large, data-heavy)
 # ==========================================
 notebooks/*.ipynb
+# Sprint 5 debug scripts
+scripts/debug/
+
+# Reports (regenerable)
+reports/portfolio/
+reports/tearsheets/
+reports/sector/
