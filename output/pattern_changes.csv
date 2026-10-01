@@ -1,0 +1,501 @@
+company_id,company_name,sector,year,prev_pattern,curr_pattern,change_type
+ABB,Abbott India Ltd,Industrials,2019,Reinvestor,Growth Funded by Debt,Deterioration
+ABB,Abbott India Ltd,Industrials,2020,Growth Funded by Debt,Reinvestor,Improvement
+ABB,Abbott India Ltd,Industrials,2023,Reinvestor,Growth Funded by Debt,Deterioration
+ABB,Abbott India Ltd,Industrials,2024,Growth Funded by Debt,Reinvestor,Improvement
+ADANIENSOL,Adani Energy Solutions Ltd,Energy,2015,Cash Accumulator,Distress Signal,Deterioration
+ADANIENSOL,Adani Energy Solutions Ltd,Energy,2016,Distress Signal,Reinvestor,Improvement
+ADANIENSOL,Adani Energy Solutions Ltd,Energy,2018,Reinvestor,Growth Funded by Debt,Deterioration
+ADANIENSOL,Adani Energy Solutions Ltd,Energy,2021,Growth Funded by Debt,Reinvestor,Improvement
+ADANIENSOL,Adani Energy Solutions Ltd,Energy,2023,Reinvestor,Growth Funded by Debt,Deterioration
+ADANIENSOL,Adani Energy Solutions Ltd,Energy,2024,Growth Funded by Debt,Reinvestor,Improvement
+ADANIENT,Adani Enterprises Ltd,Industrials,2014,Growth Funded by Debt,Reinvestor,Improvement
+ADANIENT,Adani Enterprises Ltd,Industrials,2015,Reinvestor,Growth Funded by Debt,Deterioration
+ADANIENT,Adani Enterprises Ltd,Industrials,2016,Growth Funded by Debt,Reinvestor,Improvement
+ADANIENT,Adani Enterprises Ltd,Industrials,2017,Reinvestor,Growth Funded by Debt,Deterioration
+ADANIENT,Adani Enterprises Ltd,Industrials,2019,Growth Funded by Debt,Divestment & Deleverage,Improvement
+ADANIENT,Adani Enterprises Ltd,Industrials,2020,Divestment & Deleverage,Reinvestor,Improvement
+ADANIENT,Adani Enterprises Ltd,Industrials,2021,Reinvestor,Growth Funded by Debt,Deterioration
+ADANIENT,Adani Enterprises Ltd,Industrials,2023,Growth Funded by Debt,Reinvestor,Improvement
+ADANIENT,Adani Enterprises Ltd,Industrials,2024,Reinvestor,Growth Funded by Debt,Deterioration
+ADANIGREEN,Adani Green Energy Ltd,Energy,2023,Growth Funded by Debt,Reinvestor,Improvement
+ADANIGREEN,Adani Green Energy Ltd,Energy,2024,Reinvestor,Growth Funded by Debt,Deterioration
+ADANIPORTS,"Adani Ports & Special Economic Zone Ltd
+",Industrials,2015,Growth Funded by Debt,Reinvestor,Improvement
+ADANIPORTS,"Adani Ports & Special Economic Zone Ltd
+",Industrials,2016,Reinvestor,Growth Funded by Debt,Deterioration
+ADANIPORTS,"Adani Ports & Special Economic Zone Ltd
+",Industrials,2017,Growth Funded by Debt,Reinvestor,Improvement
+ADANIPORTS,"Adani Ports & Special Economic Zone Ltd
+",Industrials,2019,Reinvestor,Growth Funded by Debt,Deterioration
+ADANIPORTS,"Adani Ports & Special Economic Zone Ltd
+",Industrials,2020,Growth Funded by Debt,Reinvestor,Improvement
+ADANIPORTS,"Adani Ports & Special Economic Zone Ltd
+",Industrials,2021,Reinvestor,Growth Funded by Debt,Deterioration
+ADANIPORTS,"Adani Ports & Special Economic Zone Ltd
+",Industrials,2022,Growth Funded by Debt,Reinvestor,Improvement
+ADANIPOWER,Adani Power Ltd,Energy,2015,Growth Funded by Debt,Reinvestor,Improvement
+ADANIPOWER,Adani Power Ltd,Energy,2022,Reinvestor,Divestment & Deleverage,Deterioration
+AMBUJACEM,Ambuja Cements Ltd,Materials,2023,Reinvestor,Growth Funded by Debt,Deterioration
+APOLLOHOSP,"Apollo Hospitals
+Chain of Indian private hospitals",Healthcare,2014,Growth Funded by Debt,Reinvestor,Improvement
+APOLLOHOSP,"Apollo Hospitals
+Chain of Indian private hospitals",Healthcare,2015,Reinvestor,Growth Funded by Debt,Deterioration
+APOLLOHOSP,"Apollo Hospitals
+Chain of Indian private hospitals",Healthcare,2018,Growth Funded by Debt,Reinvestor,Improvement
+AXISBANK,Axis Bank Ltd,Financials,2015,Growth Funded by Debt,Distress Signal,Deterioration
+AXISBANK,Axis Bank Ltd,Financials,2016,Distress Signal,Liquidation Mode,Improvement
+AXISBANK,Axis Bank Ltd,Financials,2017,Liquidation Mode,Reinvestor,Improvement
+AXISBANK,Axis Bank Ltd,Financials,2018,Reinvestor,Distress Signal,Deterioration
+AXISBANK,Axis Bank Ltd,Financials,2019,Distress Signal,Growth Funded by Debt,Improvement
+AXISBANK,Axis Bank Ltd,Financials,2024,Growth Funded by Debt,Distress Signal,Deterioration
+BAJAJ-AUTO,Bajaj Auto Ltd,Consumer Discretionary,2020,Reinvestor,Divestment & Deleverage,Deterioration
+BAJAJ-AUTO,Bajaj Auto Ltd,Consumer Discretionary,2021,Divestment & Deleverage,Reinvestor,Improvement
+BAJAJ-AUTO,Bajaj Auto Ltd,Consumer Discretionary,2022,Reinvestor,Divestment & Deleverage,Deterioration
+BAJAJ-AUTO,Bajaj Auto Ltd,Consumer Discretionary,2024,Divestment & Deleverage,Reinvestor,Improvement
+BAJAJFINSV,Bajaj Finserv Ltd,Financials,2016,Liquidation Mode,Distress Signal,Deterioration
+BAJAJFINSV,Bajaj Finserv Ltd,Financials,2017,Distress Signal,Liquidation Mode,Improvement
+BAJAJFINSV,Bajaj Finserv Ltd,Financials,2018,Liquidation Mode,Distress Signal,Deterioration
+BAJAJFINSV,Bajaj Finserv Ltd,Financials,2021,Distress Signal,Growth Funded by Debt,Improvement
+BAJAJFINSV,Bajaj Finserv Ltd,Financials,2022,Growth Funded by Debt,Liquidation Mode,Deterioration
+BAJAJFINSV,Bajaj Finserv Ltd,Financials,2023,Liquidation Mode,Distress Signal,Deterioration
+BAJAJHLDNG,Bajaj Holdings & Investment Ltd,Financials,2016,Reinvestor,Divestment & Deleverage,Deterioration
+BAJAJHLDNG,Bajaj Holdings & Investment Ltd,Financials,2017,Divestment & Deleverage,Severe Distress,Deterioration
+BAJAJHLDNG,Bajaj Holdings & Investment Ltd,Financials,2018,Severe Distress,Reinvestor,Improvement
+BAJFINANCE,Bajaj Finance Ltd,Financials,2018,Distress Signal,Liquidation Mode,Improvement
+BAJFINANCE,Bajaj Finance Ltd,Financials,2019,Liquidation Mode,Distress Signal,Deterioration
+BAJFINANCE,Bajaj Finance Ltd,Financials,2022,Distress Signal,Liquidation Mode,Improvement
+BAJFINANCE,Bajaj Finance Ltd,Financials,2023,Liquidation Mode,Distress Signal,Deterioration
+BANKBARODA,Bank of Baroda,Financials,2014,Reinvestor,Growth Funded by Debt,Deterioration
+BANKBARODA,Bank of Baroda,Financials,2015,Growth Funded by Debt,Reinvestor,Improvement
+BANKBARODA,Bank of Baroda,Financials,2016,Reinvestor,Severe Distress,Deterioration
+BANKBARODA,Bank of Baroda,Financials,2017,Severe Distress,Reinvestor,Improvement
+BANKBARODA,Bank of Baroda,Financials,2018,Reinvestor,Distress Signal,Deterioration
+BANKBARODA,Bank of Baroda,Financials,2020,Distress Signal,Growth Funded by Debt,Improvement
+BANKBARODA,Bank of Baroda,Financials,2021,Growth Funded by Debt,Severe Distress,Deterioration
+BANKBARODA,Bank of Baroda,Financials,2022,Severe Distress,Reinvestor,Improvement
+BANKBARODA,Bank of Baroda,Financials,2023,Reinvestor,Severe Distress,Deterioration
+BANKBARODA,Bank of Baroda,Financials,2024,Severe Distress,Distress Signal,Improvement
+BEL,Bharat Electronics Ltd,Industrials,2015,Turnaround,Reinvestor,Improvement
+BEL,Bharat Electronics Ltd,Industrials,2017,Reinvestor,Turnaround,Deterioration
+BEL,Bharat Electronics Ltd,Industrials,2018,Turnaround,Severe Distress,Deterioration
+BEL,Bharat Electronics Ltd,Industrials,2019,Severe Distress,Reinvestor,Improvement
+BEL,Bharat Electronics Ltd,Industrials,2023,Reinvestor,Divestment & Deleverage,Deterioration
+BEL,Bharat Electronics Ltd,Industrials,2024,Divestment & Deleverage,Reinvestor,Improvement
+BHARTIARTL,Bharti Airtel Ltd,Communication Services,2014,Reinvestor,Growth Funded by Debt,Deterioration
+BHARTIARTL,Bharti Airtel Ltd,Communication Services,2015,Growth Funded by Debt,Reinvestor,Improvement
+BHARTIARTL,Bharti Airtel Ltd,Communication Services,2018,Reinvestor,Growth Funded by Debt,Deterioration
+BHARTIARTL,Bharti Airtel Ltd,Communication Services,2021,Growth Funded by Debt,Reinvestor,Improvement
+BHEL,"Bharat Heavy Electricals Limited
+",Industrials,2015,Growth Funded by Debt,Divestment & Deleverage,Improvement
+BHEL,"Bharat Heavy Electricals Limited
+",Industrials,2017,Divestment & Deleverage,Reinvestor,Improvement
+BHEL,"Bharat Heavy Electricals Limited
+",Industrials,2018,Reinvestor,Divestment & Deleverage,Deterioration
+BHEL,"Bharat Heavy Electricals Limited
+",Industrials,2019,Divestment & Deleverage,Turnaround,Deterioration
+BHEL,"Bharat Heavy Electricals Limited
+",Industrials,2020,Turnaround,Liquidation Mode,Deterioration
+BHEL,"Bharat Heavy Electricals Limited
+",Industrials,2021,Liquidation Mode,Reinvestor,Improvement
+BHEL,"Bharat Heavy Electricals Limited
+",Industrials,2023,Reinvestor,Liquidation Mode,Deterioration
+BOSCHLTD,Bosch Ltd,Consumer Discretionary,2017,Reinvestor,Divestment & Deleverage,Deterioration
+BOSCHLTD,Bosch Ltd,Consumer Discretionary,2018,Divestment & Deleverage,Reinvestor,Improvement
+BOSCHLTD,Bosch Ltd,Consumer Discretionary,2019,Reinvestor,Divestment & Deleverage,Deterioration
+BOSCHLTD,Bosch Ltd,Consumer Discretionary,2020,Divestment & Deleverage,Reinvestor,Improvement
+BOSCHLTD,Bosch Ltd,Consumer Discretionary,2023,Reinvestor,Divestment & Deleverage,Deterioration
+BPCL,Bharat Petroleum Corporation Ltd,Energy,2017,Reinvestor,Growth Funded by Debt,Deterioration
+BPCL,Bharat Petroleum Corporation Ltd,Energy,2018,Growth Funded by Debt,Reinvestor,Improvement
+BPCL,Bharat Petroleum Corporation Ltd,Energy,2019,Reinvestor,Growth Funded by Debt,Deterioration
+BPCL,Bharat Petroleum Corporation Ltd,Energy,2021,Growth Funded by Debt,Reinvestor,Improvement
+BRITANNIA,Britannia Industries Ltd,Consumer Staples,2014,Divestment & Deleverage,Reinvestor,Improvement
+BRITANNIA,Britannia Industries Ltd,Consumer Staples,2020,Reinvestor,Growth Funded by Debt,Deterioration
+BRITANNIA,Britannia Industries Ltd,Consumer Staples,2021,Growth Funded by Debt,Divestment & Deleverage,Improvement
+BRITANNIA,Britannia Industries Ltd,Consumer Staples,2023,Divestment & Deleverage,Reinvestor,Improvement
+BRITANNIA,Britannia Industries Ltd,Consumer Staples,2024,Reinvestor,Divestment & Deleverage,Deterioration
+CANBK,Canara Bank,Financials,2017,Reinvestor,Growth Funded by Debt,Deterioration
+CANBK,Canara Bank,Financials,2018,Growth Funded by Debt,Distress Signal,Deterioration
+CANBK,Canara Bank,Financials,2019,Distress Signal,Reinvestor,Improvement
+CANBK,Canara Bank,Financials,2020,Reinvestor,Distress Signal,Deterioration
+CANBK,Canara Bank,Financials,2021,Distress Signal,Growth Funded by Debt,Improvement
+CANBK,Canara Bank,Financials,2023,Growth Funded by Debt,Distress Signal,Deterioration
+CANBK,Canara Bank,Financials,2024,Distress Signal,Reinvestor,Improvement
+CHOLAFIN,Cholamandalam Investment & Finance Company Ltd,Financials,2014,Liquidation Mode,Distress Signal,Deterioration
+CHOLAFIN,Cholamandalam Investment & Finance Company Ltd,Financials,2022,Distress Signal,Liquidation Mode,Improvement
+CHOLAFIN,Cholamandalam Investment & Finance Company Ltd,Financials,2023,Liquidation Mode,Distress Signal,Deterioration
+CIPLA,"Cipla Ltd
+",Healthcare,2014,Growth Funded by Debt,Reinvestor,Improvement
+CIPLA,"Cipla Ltd
+",Healthcare,2015,Reinvestor,Growth Funded by Debt,Deterioration
+CIPLA,"Cipla Ltd
+",Healthcare,2017,Growth Funded by Debt,Reinvestor,Improvement
+CIPLA,"Cipla Ltd
+",Healthcare,2020,Reinvestor,Divestment & Deleverage,Deterioration
+CIPLA,"Cipla Ltd
+",Healthcare,2021,Divestment & Deleverage,Reinvestor,Improvement
+COALINDIA,Coal India Ltd,Materials,2014,Reinvestor,Divestment & Deleverage,Deterioration
+COALINDIA,Coal India Ltd,Materials,2018,Divestment & Deleverage,Reinvestor,Improvement
+COALINDIA,Coal India Ltd,Materials,2020,Reinvestor,Divestment & Deleverage,Deterioration
+COALINDIA,Coal India Ltd,Materials,2022,Divestment & Deleverage,Reinvestor,Improvement
+DABUR,Dabur India Ltd,Consumer Staples,2019,Reinvestor,Divestment & Deleverage,Deterioration
+DABUR,Dabur India Ltd,Consumer Staples,2020,Divestment & Deleverage,Reinvestor,Improvement
+DIVISLAB,Divis Laboratories Ltd,Healthcare,2017,Reinvestor,Growth Funded by Debt,Deterioration
+DIVISLAB,Divis Laboratories Ltd,Healthcare,2018,Growth Funded by Debt,Reinvestor,Improvement
+DIVISLAB,Divis Laboratories Ltd,Healthcare,2021,Reinvestor,Divestment & Deleverage,Deterioration
+DIVISLAB,Divis Laboratories Ltd,Healthcare,2022,Divestment & Deleverage,Reinvestor,Improvement
+DLF,DLF Ltd,Real Estate,2016,Divestment & Deleverage,Reinvestor,Improvement
+DLF,DLF Ltd,Real Estate,2017,Reinvestor,Liquidation Mode,Deterioration
+DLF,DLF Ltd,Real Estate,2018,Liquidation Mode,Reinvestor,Improvement
+DLF,DLF Ltd,Real Estate,2019,Reinvestor,Cash Accumulator,Deterioration
+DLF,DLF Ltd,Real Estate,2020,Cash Accumulator,Divestment & Deleverage,Deterioration
+DLF,DLF Ltd,Real Estate,2023,Divestment & Deleverage,Reinvestor,Improvement
+DLF,DLF Ltd,Real Estate,2024,Reinvestor,Growth Funded by Debt,Deterioration
+DMART,Avenue Supermarts Ltd,Consumer Discretionary,2018,Growth Funded by Debt,Divestment & Deleverage,Improvement
+DMART,Avenue Supermarts Ltd,Consumer Discretionary,2019,Divestment & Deleverage,Growth Funded by Debt,Deterioration
+DMART,Avenue Supermarts Ltd,Consumer Discretionary,2021,Growth Funded by Debt,Reinvestor,Improvement
+EICHERMOT,Eicher Motors Ltd,Consumer Discretionary,2017,Reinvestor,Growth Funded by Debt,Deterioration
+EICHERMOT,Eicher Motors Ltd,Consumer Discretionary,2018,Growth Funded by Debt,Reinvestor,Improvement
+GAIL,GAIL (India) Ltd,Energy,2014,Growth Funded by Debt,Reinvestor,Improvement
+GAIL,GAIL (India) Ltd,Energy,2020,Reinvestor,Growth Funded by Debt,Deterioration
+GAIL,GAIL (India) Ltd,Energy,2021,Growth Funded by Debt,Reinvestor,Improvement
+GAIL,GAIL (India) Ltd,Energy,2023,Reinvestor,Growth Funded by Debt,Deterioration
+GAIL,GAIL (India) Ltd,Energy,2024,Growth Funded by Debt,Reinvestor,Improvement
+GODREJCP,Godrej Consumer Products Ltd,Consumer Staples,2014,Growth Funded by Debt,Reinvestor,Improvement
+GODREJCP,Godrej Consumer Products Ltd,Consumer Staples,2017,Reinvestor,Growth Funded by Debt,Deterioration
+GODREJCP,Godrej Consumer Products Ltd,Consumer Staples,2018,Growth Funded by Debt,Reinvestor,Improvement
+GODREJCP,Godrej Consumer Products Ltd,Consumer Staples,2019,Reinvestor,Divestment & Deleverage,Deterioration
+GODREJCP,Godrej Consumer Products Ltd,Consumer Staples,2020,Divestment & Deleverage,Reinvestor,Improvement
+GODREJCP,Godrej Consumer Products Ltd,Consumer Staples,2024,Reinvestor,Growth Funded by Debt,Deterioration
+GRASIM,Grasim Industries Ltd,Industrials,2014,Growth Funded by Debt,Reinvestor,Improvement
+GRASIM,Grasim Industries Ltd,Industrials,2018,Reinvestor,Liquidation Mode,Deterioration
+GRASIM,Grasim Industries Ltd,Industrials,2019,Liquidation Mode,Distress Signal,Deterioration
+GRASIM,Grasim Industries Ltd,Industrials,2020,Distress Signal,Reinvestor,Improvement
+GRASIM,Grasim Industries Ltd,Industrials,2023,Reinvestor,Distress Signal,Deterioration
+HAL,Hindustan Aeronautics Ltd,Industrials,2019,Turnaround,Liquidation Mode,Deterioration
+HAL,Hindustan Aeronautics Ltd,Industrials,2020,Liquidation Mode,Growth Funded by Debt,Improvement
+HAL,Hindustan Aeronautics Ltd,Industrials,2021,Growth Funded by Debt,Reinvestor,Improvement
+HAVELLS,Havells India Ltd,Industrials,2019,Reinvestor,Divestment & Deleverage,Deterioration
+HAVELLS,Havells India Ltd,Industrials,2020,Divestment & Deleverage,Reinvestor,Improvement
+HAVELLS,Havells India Ltd,Industrials,2021,Reinvestor,Growth Funded by Debt,Deterioration
+HAVELLS,Havells India Ltd,Industrials,2022,Growth Funded by Debt,Reinvestor,Improvement
+HAVELLS,Havells India Ltd,Industrials,2023,Reinvestor,Divestment & Deleverage,Deterioration
+HAVELLS,Havells India Ltd,Industrials,2024,Divestment & Deleverage,Reinvestor,Improvement
+HCLTECH,HCL Technologies Ltd,Information Technology,2022,Reinvestor,Divestment & Deleverage,Deterioration
+HCLTECH,HCL Technologies Ltd,Information Technology,2023,Divestment & Deleverage,Reinvestor,Improvement
+HDFCBANK,HDFC Bank Ltd,Financials,2014,Distress Signal,Growth Funded by Debt,Improvement
+HDFCBANK,HDFC Bank Ltd,Financials,2015,Growth Funded by Debt,Distress Signal,Deterioration
+HDFCBANK,HDFC Bank Ltd,Financials,2017,Distress Signal,Reinvestor,Improvement
+HDFCBANK,HDFC Bank Ltd,Financials,2018,Reinvestor,Growth Funded by Debt,Deterioration
+HDFCBANK,HDFC Bank Ltd,Financials,2019,Growth Funded by Debt,Distress Signal,Deterioration
+HDFCBANK,HDFC Bank Ltd,Financials,2021,Distress Signal,Reinvestor,Improvement
+HDFCBANK,HDFC Bank Ltd,Financials,2022,Reinvestor,Distress Signal,Deterioration
+HDFCBANK,HDFC Bank Ltd,Financials,2023,Distress Signal,Growth Funded by Debt,Improvement
+HDFCBANK,HDFC Bank Ltd,Financials,2024,Growth Funded by Debt,Divestment & Deleverage,Improvement
+HDFCLIFE,HDFC Life Insurance Company Ltd,Financials,2020,Reinvestor,Growth Funded by Debt,Deterioration
+HDFCLIFE,HDFC Life Insurance Company Ltd,Financials,2022,Growth Funded by Debt,Reinvestor,Improvement
+HDFCLIFE,HDFC Life Insurance Company Ltd,Financials,2023,Reinvestor,Growth Funded by Debt,Deterioration
+HDFCLIFE,HDFC Life Insurance Company Ltd,Financials,2024,Growth Funded by Debt,Reinvestor,Improvement
+HEROMOTOCO,"Hero MotoCorp Ltd
+",Consumer Discretionary,2015,Reinvestor,Divestment & Deleverage,Deterioration
+HEROMOTOCO,"Hero MotoCorp Ltd
+",Consumer Discretionary,2016,Divestment & Deleverage,Reinvestor,Improvement
+HEROMOTOCO,"Hero MotoCorp Ltd
+",Consumer Discretionary,2019,Reinvestor,Divestment & Deleverage,Deterioration
+HEROMOTOCO,"Hero MotoCorp Ltd
+",Consumer Discretionary,2020,Divestment & Deleverage,Reinvestor,Improvement
+HINDALCO,Hindalco Industries Ltd,Materials,2015,Growth Funded by Debt,Reinvestor,Improvement
+HINDALCO,Hindalco Industries Ltd,Materials,2018,Reinvestor,Divestment & Deleverage,Deterioration
+HINDALCO,Hindalco Industries Ltd,Materials,2019,Divestment & Deleverage,Reinvestor,Improvement
+HINDALCO,Hindalco Industries Ltd,Materials,2020,Reinvestor,Growth Funded by Debt,Deterioration
+HINDALCO,Hindalco Industries Ltd,Materials,2021,Growth Funded by Debt,Reinvestor,Improvement
+HINDUNILVR,"Hindustan Unilever Ltd
+",Consumer Staples,2014,Divestment & Deleverage,Reinvestor,Improvement
+HINDUNILVR,"Hindustan Unilever Ltd
+",Consumer Staples,2015,Reinvestor,Divestment & Deleverage,Deterioration
+HINDUNILVR,"Hindustan Unilever Ltd
+",Consumer Staples,2016,Divestment & Deleverage,Reinvestor,Improvement
+HINDUNILVR,"Hindustan Unilever Ltd
+",Consumer Staples,2020,Reinvestor,Divestment & Deleverage,Deterioration
+HINDUNILVR,"Hindustan Unilever Ltd
+",Consumer Staples,2021,Divestment & Deleverage,Reinvestor,Improvement
+ICICIBANK,ICICI Bank Ltd,Financials,2015,Growth Funded by Debt,Distress Signal,Deterioration
+ICICIBANK,ICICI Bank Ltd,Financials,2016,Distress Signal,Growth Funded by Debt,Improvement
+ICICIBANK,ICICI Bank Ltd,Financials,2017,Growth Funded by Debt,Reinvestor,Improvement
+ICICIBANK,ICICI Bank Ltd,Financials,2018,Reinvestor,Growth Funded by Debt,Deterioration
+ICICIBANK,ICICI Bank Ltd,Financials,2019,Growth Funded by Debt,Reinvestor,Improvement
+ICICIBANK,ICICI Bank Ltd,Financials,2020,Reinvestor,Growth Funded by Debt,Deterioration
+ICICIBANK,ICICI Bank Ltd,Financials,2021,Growth Funded by Debt,Reinvestor,Improvement
+ICICIBANK,ICICI Bank Ltd,Financials,2022,Reinvestor,Growth Funded by Debt,Deterioration
+ICICIBANK,ICICI Bank Ltd,Financials,2023,Growth Funded by Debt,Distress Signal,Deterioration
+ICICIBANK,ICICI Bank Ltd,Financials,2024,Distress Signal,Growth Funded by Debt,Improvement
+ICICIGI,ICICI Lombard General Insurance Company Ltd,Financials,2015,Growth Funded by Debt,Turnaround,Deterioration
+ICICIGI,ICICI Lombard General Insurance Company Ltd,Financials,2016,Turnaround,Reinvestor,Improvement
+ICICIGI,ICICI Lombard General Insurance Company Ltd,Financials,2017,Reinvestor,Growth Funded by Debt,Deterioration
+ICICIGI,ICICI Lombard General Insurance Company Ltd,Financials,2018,Growth Funded by Debt,Reinvestor,Improvement
+ICICIGI,ICICI Lombard General Insurance Company Ltd,Financials,2022,Reinvestor,Divestment & Deleverage,Deterioration
+ICICIGI,ICICI Lombard General Insurance Company Ltd,Financials,2023,Divestment & Deleverage,Reinvestor,Improvement
+ICICIPRULI,ICICI Prudential Life Insurance Company Ltd,Financials,2015,Turnaround,Reinvestor,Improvement
+ICICIPRULI,ICICI Prudential Life Insurance Company Ltd,Financials,2016,Reinvestor,Divestment & Deleverage,Deterioration
+ICICIPRULI,ICICI Prudential Life Insurance Company Ltd,Financials,2017,Divestment & Deleverage,Reinvestor,Improvement
+ICICIPRULI,ICICI Prudential Life Insurance Company Ltd,Financials,2021,Reinvestor,Growth Funded by Debt,Deterioration
+ICICIPRULI,ICICI Prudential Life Insurance Company Ltd,Financials,2022,Growth Funded by Debt,Reinvestor,Improvement
+ICICIPRULI,ICICI Prudential Life Insurance Company Ltd,Financials,2024,Reinvestor,Turnaround,Deterioration
+INDIGO,Interglobe Aviation Ltd,Consumer Discretionary,2015,Growth Funded by Debt,Reinvestor,Improvement
+INDIGO,Interglobe Aviation Ltd,Consumer Discretionary,2018,Reinvestor,Growth Funded by Debt,Deterioration
+INDIGO,Interglobe Aviation Ltd,Consumer Discretionary,2019,Growth Funded by Debt,Reinvestor,Improvement
+INDIGO,Interglobe Aviation Ltd,Consumer Discretionary,2021,Reinvestor,Turnaround,Deterioration
+INDIGO,Interglobe Aviation Ltd,Consumer Discretionary,2022,Turnaround,Divestment & Deleverage,Improvement
+INDIGO,Interglobe Aviation Ltd,Consumer Discretionary,2023,Divestment & Deleverage,Reinvestor,Improvement
+INDUSINDBK,IndusInd Bank Ltd,Financials,2017,Distress Signal,Reinvestor,Improvement
+INDUSINDBK,IndusInd Bank Ltd,Financials,2018,Reinvestor,Distress Signal,Deterioration
+INDUSINDBK,IndusInd Bank Ltd,Financials,2020,Distress Signal,Liquidation Mode,Improvement
+INDUSINDBK,IndusInd Bank Ltd,Financials,2021,Liquidation Mode,Reinvestor,Improvement
+INDUSINDBK,IndusInd Bank Ltd,Financials,2023,Reinvestor,Distress Signal,Deterioration
+INDUSINDBK,IndusInd Bank Ltd,Financials,2024,Distress Signal,Severe Distress,Deterioration
+INFY,Infosys Ltd,Information Technology,2015,Reinvestor,Divestment & Deleverage,Deterioration
+INFY,Infosys Ltd,Information Technology,2016,Divestment & Deleverage,Reinvestor,Improvement
+INFY,Infosys Ltd,Information Technology,2018,Reinvestor,Divestment & Deleverage,Deterioration
+INFY,Infosys Ltd,Information Technology,2019,Divestment & Deleverage,Reinvestor,Improvement
+IOC,"Indian Oil Corporation
+",Energy,2014,Growth Funded by Debt,Reinvestor,Improvement
+IOC,"Indian Oil Corporation
+",Energy,2019,Reinvestor,Growth Funded by Debt,Deterioration
+IOC,"Indian Oil Corporation
+",Energy,2021,Growth Funded by Debt,Reinvestor,Improvement
+IRCTC,Indian Railway Catering & Tourism Corporation Ltd,Consumer Discretionary,2016,Reinvestor,Divestment & Deleverage,Deterioration
+IRCTC,Indian Railway Catering & Tourism Corporation Ltd,Consumer Discretionary,2019,Divestment & Deleverage,Reinvestor,Improvement
+IRCTC,Indian Railway Catering & Tourism Corporation Ltd,Consumer Discretionary,2020,Reinvestor,Divestment & Deleverage,Deterioration
+IRCTC,Indian Railway Catering & Tourism Corporation Ltd,Consumer Discretionary,2021,Divestment & Deleverage,Reinvestor,Improvement
+IRFC,Indian Railway Finance Corporation Ltd,Financials,2022,Liquidation Mode,Distress Signal,Deterioration
+IRFC,Indian Railway Finance Corporation Ltd,Financials,2023,Distress Signal,Liquidation Mode,Improvement
+IRFC,Indian Railway Finance Corporation Ltd,Financials,2024,Liquidation Mode,Reinvestor,Improvement
+ITC,"ITC Ltd
+",Consumer Staples,2021,Reinvestor,Divestment & Deleverage,Deterioration
+ITC,"ITC Ltd
+",Consumer Staples,2022,Divestment & Deleverage,Reinvestor,Improvement
+ITC,"ITC Ltd
+",Consumer Staples,2024,Reinvestor,Divestment & Deleverage,Deterioration
+JINDALSTEL,Jindal Steel & Power Ltd,Materials,2016,Growth Funded by Debt,Reinvestor,Improvement
+JINDALSTEL,Jindal Steel & Power Ltd,Materials,2024,Reinvestor,Growth Funded by Debt,Deterioration
+JIOFIN,Jio Financial Services Ltd,Financials,2024,Reinvestor,Turnaround,Deterioration
+JSWENERGY,JSW Energy Ltd,Energy,2020,Reinvestor,Divestment & Deleverage,Deterioration
+JSWENERGY,JSW Energy Ltd,Energy,2021,Divestment & Deleverage,Reinvestor,Improvement
+JSWENERGY,JSW Energy Ltd,Energy,2023,Reinvestor,Growth Funded by Debt,Deterioration
+JSWSTEEL,JSW Steel Ltd,Materials,2014,Reinvestor,Growth Funded by Debt,Deterioration
+JSWSTEEL,JSW Steel Ltd,Materials,2015,Growth Funded by Debt,Reinvestor,Improvement
+JSWSTEEL,JSW Steel Ltd,Materials,2019,Reinvestor,Growth Funded by Debt,Deterioration
+JSWSTEEL,JSW Steel Ltd,Materials,2021,Growth Funded by Debt,Reinvestor,Improvement
+KOTAKBANK,"Kotak Mahindra Bank Ltd
+",Financials,2014,Growth Funded by Debt,Reinvestor,Improvement
+KOTAKBANK,"Kotak Mahindra Bank Ltd
+",Financials,2015,Reinvestor,Growth Funded by Debt,Deterioration
+KOTAKBANK,"Kotak Mahindra Bank Ltd
+",Financials,2018,Growth Funded by Debt,Distress Signal,Deterioration
+KOTAKBANK,"Kotak Mahindra Bank Ltd
+",Financials,2019,Distress Signal,Growth Funded by Debt,Improvement
+KOTAKBANK,"Kotak Mahindra Bank Ltd
+",Financials,2020,Growth Funded by Debt,Reinvestor,Improvement
+KOTAKBANK,"Kotak Mahindra Bank Ltd
+",Financials,2022,Reinvestor,Growth Funded by Debt,Deterioration
+KOTAKBANK,"Kotak Mahindra Bank Ltd
+",Financials,2023,Growth Funded by Debt,Distress Signal,Deterioration
+KOTAKBANK,"Kotak Mahindra Bank Ltd
+",Financials,2024,Distress Signal,Growth Funded by Debt,Improvement
+LICI,Life Insurance Corporation of India,Financials,2020,Divestment & Deleverage,Reinvestor,Improvement
+LICI,Life Insurance Corporation of India,Financials,2021,Reinvestor,Divestment & Deleverage,Deterioration
+LICI,Life Insurance Corporation of India,Financials,2022,Divestment & Deleverage,Liquidation Mode,Deterioration
+LICI,Life Insurance Corporation of India,Financials,2023,Liquidation Mode,Reinvestor,Improvement
+LODHA,Macrotech Developers Ltd,Real Estate,2017,Growth Funded by Debt,Reinvestor,Improvement
+LODHA,Macrotech Developers Ltd,Real Estate,2018,Reinvestor,Growth Funded by Debt,Deterioration
+LODHA,Macrotech Developers Ltd,Real Estate,2019,Growth Funded by Debt,Distress Signal,Deterioration
+LODHA,Macrotech Developers Ltd,Real Estate,2020,Distress Signal,Divestment & Deleverage,Improvement
+LODHA,Macrotech Developers Ltd,Real Estate,2024,Divestment & Deleverage,Growth Funded by Debt,Deterioration
+LT,Larsen & Toubro Ltd,Industrials,2017,Distress Signal,Growth Funded by Debt,Improvement
+LT,Larsen & Toubro Ltd,Industrials,2018,Growth Funded by Debt,Liquidation Mode,Deterioration
+LT,Larsen & Toubro Ltd,Industrials,2019,Liquidation Mode,Distress Signal,Deterioration
+LT,Larsen & Toubro Ltd,Industrials,2020,Distress Signal,Growth Funded by Debt,Improvement
+LT,Larsen & Toubro Ltd,Industrials,2021,Growth Funded by Debt,Reinvestor,Improvement
+LT,Larsen & Toubro Ltd,Industrials,2024,Reinvestor,Divestment & Deleverage,Deterioration
+LTIM,LTIMindtree Ltd,Information Technology,2014,Reinvestor,Divestment & Deleverage,Deterioration
+LTIM,LTIMindtree Ltd,Information Technology,2015,Divestment & Deleverage,Reinvestor,Improvement
+M&M,"Mahindra & Mahindra Ltd
+",Consumer Discretionary,2015,Distress Signal,Growth Funded by Debt,Improvement
+M&M,"Mahindra & Mahindra Ltd
+",Consumer Discretionary,2019,Growth Funded by Debt,Distress Signal,Deterioration
+M&M,"Mahindra & Mahindra Ltd
+",Consumer Discretionary,2021,Distress Signal,Growth Funded by Debt,Improvement
+M&M,"Mahindra & Mahindra Ltd
+",Consumer Discretionary,2022,Growth Funded by Debt,Reinvestor,Improvement
+M&M,"Mahindra & Mahindra Ltd
+",Consumer Discretionary,2023,Reinvestor,Distress Signal,Deterioration
+MOTHERSON,Samvardhana Motherson International Ltd,Consumer Discretionary,2015,Reinvestor,Growth Funded by Debt,Deterioration
+MOTHERSON,Samvardhana Motherson International Ltd,Consumer Discretionary,2016,Growth Funded by Debt,Reinvestor,Improvement
+MOTHERSON,Samvardhana Motherson International Ltd,Consumer Discretionary,2017,Reinvestor,Growth Funded by Debt,Deterioration
+MOTHERSON,Samvardhana Motherson International Ltd,Consumer Discretionary,2018,Growth Funded by Debt,Reinvestor,Improvement
+MOTHERSON,Samvardhana Motherson International Ltd,Consumer Discretionary,2024,Reinvestor,Growth Funded by Debt,Deterioration
+NAUKRI,Info Edge (India) Ltd,Communication Services,2014,Reinvestor,Growth Funded by Debt,Deterioration
+NAUKRI,Info Edge (India) Ltd,Communication Services,2016,Growth Funded by Debt,Reinvestor,Improvement
+NAUKRI,Info Edge (India) Ltd,Communication Services,2020,Reinvestor,Divestment & Deleverage,Deterioration
+NAUKRI,Info Edge (India) Ltd,Communication Services,2021,Divestment & Deleverage,Growth Funded by Debt,Deterioration
+NESTLEIND,Nestle India Ltd,Consumer Staples,2019,Reinvestor,Divestment & Deleverage,Deterioration
+NESTLEIND,Nestle India Ltd,Consumer Staples,2020,Divestment & Deleverage,Reinvestor,Improvement
+NHPC,"NHPC Ltd
+",Energy,2020,Reinvestor,Growth Funded by Debt,Deterioration
+NHPC,"NHPC Ltd
+",Energy,2021,Growth Funded by Debt,Reinvestor,Improvement
+NTPC,NTPC Ltd,Energy,2014,Growth Funded by Debt,Reinvestor,Improvement
+NTPC,NTPC Ltd,Energy,2017,Reinvestor,Growth Funded by Debt,Deterioration
+NTPC,NTPC Ltd,Energy,2021,Growth Funded by Debt,Reinvestor,Improvement
+ONGC,Oil & Natural Gas Corpn Ltd,Energy,2014,Reinvestor,Growth Funded by Debt,Deterioration
+ONGC,Oil & Natural Gas Corpn Ltd,Energy,2015,Growth Funded by Debt,Reinvestor,Improvement
+ONGC,Oil & Natural Gas Corpn Ltd,Energy,2018,Reinvestor,Growth Funded by Debt,Deterioration
+ONGC,Oil & Natural Gas Corpn Ltd,Energy,2019,Growth Funded by Debt,Reinvestor,Improvement
+PFC,Power Finance Corporation Ltd,Financials,2015,Liquidation Mode,Distress Signal,Deterioration
+PFC,Power Finance Corporation Ltd,Financials,2017,Distress Signal,Growth Funded by Debt,Improvement
+PFC,Power Finance Corporation Ltd,Financials,2018,Growth Funded by Debt,Liquidation Mode,Deterioration
+PFC,Power Finance Corporation Ltd,Financials,2019,Liquidation Mode,Distress Signal,Deterioration
+PFC,Power Finance Corporation Ltd,Financials,2021,Distress Signal,Liquidation Mode,Improvement
+PFC,Power Finance Corporation Ltd,Financials,2022,Liquidation Mode,Reinvestor,Improvement
+PFC,Power Finance Corporation Ltd,Financials,2023,Reinvestor,Distress Signal,Deterioration
+PIDILITIND,Pidilite Industries Ltd,Materials,2017,Reinvestor,Growth Funded by Debt,Deterioration
+PIDILITIND,Pidilite Industries Ltd,Materials,2018,Growth Funded by Debt,Divestment & Deleverage,Improvement
+PIDILITIND,Pidilite Industries Ltd,Materials,2019,Divestment & Deleverage,Reinvestor,Improvement
+PIDILITIND,Pidilite Industries Ltd,Materials,2020,Reinvestor,Divestment & Deleverage,Deterioration
+PIDILITIND,Pidilite Industries Ltd,Materials,2021,Divestment & Deleverage,Reinvestor,Improvement
+PNB,Punjab National Bank,Financials,2014,Severe Distress,Growth Funded by Debt,Improvement
+PNB,Punjab National Bank,Financials,2017,Growth Funded by Debt,Divestment & Deleverage,Improvement
+PNB,Punjab National Bank,Financials,2018,Divestment & Deleverage,Liquidation Mode,Deterioration
+PNB,Punjab National Bank,Financials,2019,Liquidation Mode,Distress Signal,Deterioration
+PNB,Punjab National Bank,Financials,2021,Distress Signal,Growth Funded by Debt,Improvement
+PNB,Punjab National Bank,Financials,2024,Growth Funded by Debt,Distress Signal,Deterioration
+POWERGRID,Power Grid Corporation of India Ltd,Energy,2019,Growth Funded by Debt,Reinvestor,Improvement
+POWERGRID,Power Grid Corporation of India Ltd,Energy,2022,Reinvestor,Divestment & Deleverage,Deterioration
+POWERGRID,Power Grid Corporation of India Ltd,Energy,2023,Divestment & Deleverage,Reinvestor,Improvement
+RECLTD,REC Ltd,Financials,2016,Liquidation Mode,Distress Signal,Deterioration
+RECLTD,REC Ltd,Financials,2017,Distress Signal,Reinvestor,Improvement
+RECLTD,REC Ltd,Financials,2018,Reinvestor,Liquidation Mode,Deterioration
+RECLTD,REC Ltd,Financials,2022,Liquidation Mode,Distress Signal,Deterioration
+RELIANCE,"Reliance Industries Ltd
+",Energy,2016,Growth Funded by Debt,Reinvestor,Improvement
+RELIANCE,"Reliance Industries Ltd
+",Energy,2017,Reinvestor,Growth Funded by Debt,Deterioration
+RELIANCE,"Reliance Industries Ltd
+",Energy,2018,Growth Funded by Debt,Reinvestor,Improvement
+RELIANCE,"Reliance Industries Ltd
+",Energy,2019,Reinvestor,Growth Funded by Debt,Deterioration
+RELIANCE,"Reliance Industries Ltd
+",Energy,2020,Growth Funded by Debt,Reinvestor,Improvement
+RELIANCE,"Reliance Industries Ltd
+",Energy,2021,Reinvestor,Growth Funded by Debt,Deterioration
+RELIANCE,"Reliance Industries Ltd
+",Energy,2024,Growth Funded by Debt,Reinvestor,Improvement
+SBILIFE,SBI Life Insurance Company Ltd,Financials,2021,Reinvestor,Growth Funded by Debt,Deterioration
+SBILIFE,SBI Life Insurance Company Ltd,Financials,2022,Growth Funded by Debt,Reinvestor,Improvement
+SBIN,State Bank of India,Financials,2014,Reinvestor,Growth Funded by Debt,Deterioration
+SBIN,State Bank of India,Financials,2015,Growth Funded by Debt,Reinvestor,Improvement
+SBIN,State Bank of India,Financials,2016,Reinvestor,Growth Funded by Debt,Deterioration
+SBIN,State Bank of India,Financials,2017,Growth Funded by Debt,Reinvestor,Improvement
+SBIN,State Bank of India,Financials,2018,Reinvestor,Liquidation Mode,Deterioration
+SBIN,State Bank of India,Financials,2019,Liquidation Mode,Cash Accumulator,Improvement
+SBIN,State Bank of India,Financials,2020,Cash Accumulator,Growth Funded by Debt,Deterioration
+SBIN,State Bank of India,Financials,2022,Growth Funded by Debt,Reinvestor,Improvement
+SBIN,State Bank of India,Financials,2023,Reinvestor,Distress Signal,Deterioration
+SBIN,State Bank of India,Financials,2024,Distress Signal,Reinvestor,Improvement
+SHREECEM,Shree Cement Ltd,Materials,2018,Reinvestor,Growth Funded by Debt,Deterioration
+SHREECEM,Shree Cement Ltd,Materials,2019,Growth Funded by Debt,Reinvestor,Improvement
+SHREECEM,Shree Cement Ltd,Materials,2020,Reinvestor,Growth Funded by Debt,Deterioration
+SHREECEM,Shree Cement Ltd,Materials,2021,Growth Funded by Debt,Reinvestor,Improvement
+SHRIRAMFIN,"Shriram Finance Ltd
+",Financials,2018,Distress Signal,Liquidation Mode,Improvement
+SHRIRAMFIN,"Shriram Finance Ltd
+",Financials,2019,Liquidation Mode,Distress Signal,Deterioration
+SHRIRAMFIN,"Shriram Finance Ltd
+",Financials,2023,Distress Signal,Liquidation Mode,Improvement
+SHRIRAMFIN,"Shriram Finance Ltd
+",Financials,2024,Liquidation Mode,Distress Signal,Deterioration
+SIEMENS,Siemens Ltd,Industrials,2018,Divestment & Deleverage,Reinvestor,Improvement
+SIEMENS,Siemens Ltd,Industrials,2020,Reinvestor,Divestment & Deleverage,Deterioration
+SIEMENS,Siemens Ltd,Industrials,2021,Divestment & Deleverage,Reinvestor,Improvement
+SUNPHARMA,Sun Pharmaceuticals Industries Ltd,Healthcare,2014,Reinvestor,Growth Funded by Debt,Deterioration
+SUNPHARMA,Sun Pharmaceuticals Industries Ltd,Healthcare,2015,Growth Funded by Debt,Reinvestor,Improvement
+SUNPHARMA,Sun Pharmaceuticals Industries Ltd,Healthcare,2021,Reinvestor,Divestment & Deleverage,Deterioration
+SUNPHARMA,Sun Pharmaceuticals Industries Ltd,Healthcare,2022,Divestment & Deleverage,Reinvestor,Improvement
+SUNPHARMA,Sun Pharmaceuticals Industries Ltd,Healthcare,2023,Reinvestor,Growth Funded by Debt,Deterioration
+SUNPHARMA,Sun Pharmaceuticals Industries Ltd,Healthcare,2024,Growth Funded by Debt,Reinvestor,Improvement
+TATACONSUM,Tata Consumer Products Ltd,Consumer Staples,2014,Cash Accumulator,Reinvestor,Improvement
+TATACONSUM,Tata Consumer Products Ltd,Consumer Staples,2016,Reinvestor,Divestment & Deleverage,Deterioration
+TATACONSUM,Tata Consumer Products Ltd,Consumer Staples,2018,Divestment & Deleverage,Reinvestor,Improvement
+TATACONSUM,Tata Consumer Products Ltd,Consumer Staples,2019,Reinvestor,Divestment & Deleverage,Deterioration
+TATACONSUM,Tata Consumer Products Ltd,Consumer Staples,2020,Divestment & Deleverage,Reinvestor,Improvement
+TATACONSUM,Tata Consumer Products Ltd,Consumer Staples,2024,Reinvestor,Growth Funded by Debt,Deterioration
+TATAMOTORS,Tata Motors Ltd,Consumer Discretionary,2015,Reinvestor,Growth Funded by Debt,Deterioration
+TATAMOTORS,Tata Motors Ltd,Consumer Discretionary,2016,Growth Funded by Debt,Reinvestor,Improvement
+TATAMOTORS,Tata Motors Ltd,Consumer Discretionary,2017,Reinvestor,Growth Funded by Debt,Deterioration
+TATAMOTORS,Tata Motors Ltd,Consumer Discretionary,2022,Growth Funded by Debt,Reinvestor,Improvement
+TATAPOWER,"Tata Power Company Ltd
+",Energy,2017,Reinvestor,Growth Funded by Debt,Deterioration
+TATAPOWER,"Tata Power Company Ltd
+",Energy,2018,Growth Funded by Debt,Reinvestor,Improvement
+TATAPOWER,"Tata Power Company Ltd
+",Energy,2021,Reinvestor,Divestment & Deleverage,Deterioration
+TATAPOWER,"Tata Power Company Ltd
+",Energy,2022,Divestment & Deleverage,Reinvestor,Improvement
+TATAPOWER,"Tata Power Company Ltd
+",Energy,2023,Reinvestor,Growth Funded by Debt,Deterioration
+TATAPOWER,"Tata Power Company Ltd
+",Energy,2024,Growth Funded by Debt,Reinvestor,Improvement
+TATASTEEL,"Tata Steel Ltd
+",Materials,2014,Reinvestor,Growth Funded by Debt,Deterioration
+TATASTEEL,"Tata Steel Ltd
+",Materials,2015,Growth Funded by Debt,Reinvestor,Improvement
+TATASTEEL,"Tata Steel Ltd
+",Materials,2018,Reinvestor,Growth Funded by Debt,Deterioration
+TATASTEEL,"Tata Steel Ltd
+",Materials,2019,Growth Funded by Debt,Reinvestor,Improvement
+TCS,Tata Consultancy Services Ltd,Information Technology,2018,Reinvestor,Divestment & Deleverage,Deterioration
+TCS,Tata Consultancy Services Ltd,Information Technology,2021,Divestment & Deleverage,Reinvestor,Improvement
+TCS,Tata Consultancy Services Ltd,Information Technology,2023,Reinvestor,Divestment & Deleverage,Deterioration
+TECHM,Tech Mahindra Ltd,Information Technology,2014,Growth Funded by Debt,Divestment & Deleverage,Improvement
+TECHM,Tech Mahindra Ltd,Information Technology,2015,Divestment & Deleverage,Reinvestor,Improvement
+TECHM,Tech Mahindra Ltd,Information Technology,2020,Reinvestor,Divestment & Deleverage,Deterioration
+TECHM,Tech Mahindra Ltd,Information Technology,2021,Divestment & Deleverage,Reinvestor,Improvement
+TECHM,Tech Mahindra Ltd,Information Technology,2022,Reinvestor,Divestment & Deleverage,Deterioration
+TECHM,Tech Mahindra Ltd,Information Technology,2023,Divestment & Deleverage,Reinvestor,Improvement
+TITAN,"Titan Company Ltd
+",Consumer Discretionary,2014,Reinvestor,Distress Signal,Deterioration
+TITAN,"Titan Company Ltd
+",Consumer Discretionary,2015,Distress Signal,Reinvestor,Improvement
+TITAN,"Titan Company Ltd
+",Consumer Discretionary,2018,Reinvestor,Turnaround,Deterioration
+TITAN,"Titan Company Ltd
+",Consumer Discretionary,2019,Turnaround,Reinvestor,Improvement
+TITAN,"Titan Company Ltd
+",Consumer Discretionary,2020,Reinvestor,Turnaround,Deterioration
+TITAN,"Titan Company Ltd
+",Consumer Discretionary,2021,Turnaround,Reinvestor,Improvement
+TITAN,"Titan Company Ltd
+",Consumer Discretionary,2022,Reinvestor,Turnaround,Deterioration
+TITAN,"Titan Company Ltd
+",Consumer Discretionary,2023,Turnaround,Growth Funded by Debt,Improvement
+TITAN,"Titan Company Ltd
+",Consumer Discretionary,2024,Growth Funded by Debt,Reinvestor,Improvement
+TORNTPHARM,Torrent Pharmaceuticals Ltd,Healthcare,2016,Growth Funded by Debt,Reinvestor,Improvement
+TORNTPHARM,Torrent Pharmaceuticals Ltd,Healthcare,2018,Reinvestor,Growth Funded by Debt,Deterioration
+TORNTPHARM,Torrent Pharmaceuticals Ltd,Healthcare,2019,Growth Funded by Debt,Reinvestor,Improvement
+TORNTPHARM,Torrent Pharmaceuticals Ltd,Healthcare,2020,Reinvestor,Divestment & Deleverage,Deterioration
+TORNTPHARM,Torrent Pharmaceuticals Ltd,Healthcare,2021,Divestment & Deleverage,Reinvestor,Improvement
+TORNTPHARM,Torrent Pharmaceuticals Ltd,Healthcare,2023,Reinvestor,Growth Funded by Debt,Deterioration
+TORNTPHARM,Torrent Pharmaceuticals Ltd,Healthcare,2024,Growth Funded by Debt,Reinvestor,Improvement
+TRENT,Trent Ltd,Consumer Discretionary,2014,Growth Funded by Debt,Severe Distress,Deterioration
+TRENT,Trent Ltd,Consumer Discretionary,2015,Severe Distress,Distress Signal,Improvement
+TRENT,Trent Ltd,Consumer Discretionary,2016,Distress Signal,Reinvestor,Improvement
+TRENT,Trent Ltd,Consumer Discretionary,2019,Reinvestor,Growth Funded by Debt,Deterioration
+TRENT,Trent Ltd,Consumer Discretionary,2021,Growth Funded by Debt,Divestment & Deleverage,Improvement
+TRENT,Trent Ltd,Consumer Discretionary,2023,Divestment & Deleverage,Reinvestor,Improvement
+TVSMOTOR,TVS Motor Company Ltd,Consumer Discretionary,2015,Reinvestor,Growth Funded by Debt,Deterioration
+TVSMOTOR,TVS Motor Company Ltd,Consumer Discretionary,2016,Growth Funded by Debt,Reinvestor,Improvement
+TVSMOTOR,TVS Motor Company Ltd,Consumer Discretionary,2018,Reinvestor,Growth Funded by Debt,Deterioration
+TVSMOTOR,TVS Motor Company Ltd,Consumer Discretionary,2019,Growth Funded by Debt,Distress Signal,Deterioration
+TVSMOTOR,TVS Motor Company Ltd,Consumer Discretionary,2020,Distress Signal,Growth Funded by Debt,Improvement
+TVSMOTOR,TVS Motor Company Ltd,Consumer Discretionary,2022,Growth Funded by Debt,Distress Signal,Deterioration

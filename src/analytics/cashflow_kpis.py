@@ -1,282 +1,333 @@
 """
 src/analytics/cashflow_kpis.py
-Cash Flow Intelligence Module - CFO Quality, CapEx Intensity, Distress Signals
-"""
+Cash Flow Intelligence Module.
 
+Computes for every company:
+  - CFO Quality Score  (avg CFO/PAT over 5 years)
+  - CapEx Intensity    (|investing| / sales × 100)
+  - Distress Signal    (CFO < 0 AND CFF > 0 in latest year)
+  - Deleveraging Flag  (CFF < 0 in latest year)
+  - Capital Allocation Pattern (8-label classification)
+
+Data quirks handled:
+  - cashflow.company_id is INTEGER (87, 88...) → map to ticker
+  - profitandloss.company_id is TICKER ('ABB')
+  - financial_ratios.company_id is TICKER ('ABB')
+  - cashflow.year is "Mar-13" → use year_int
+  - profitandloss.year is "Dec 2012" → use year_int
+  - 8 orphan tickers exist in ratios but not in companies → filter out
+
+Reads:  nifty100.db
+Writes: output/cashflow_intelligence.xlsx (3 sheets)
+        output/distress_alerts.csv
+        nifty100.db → 'cashflow_intelligence' table
+"""
 import sqlite3
+from pathlib import Path
+
 import pandas as pd
 import numpy as np
-from pathlib import Path
-import os
 
-DB_PATH = "nifty100.db"
-OUTPUT_DIR = Path("output")
+ROOT = Path(__file__).resolve().parents[2]
+DB_PATH = ROOT / "nifty100.db"
+OUTPUT_DIR = ROOT / "output"
+OUTPUT_DIR.mkdir(exist_ok=True)
 
 
-class CashFlowIntelligence:
-    def __init__(self, db_path=DB_PATH):
-        self.db_path = db_path
-        self.conn = None
+# ==========================================================
+# Labels
+# ==========================================================
+def cfo_quality_label(score):
+    if score is None or pd.isna(score):
+        return "Unknown"
+    if score > 1.0:
+        return "High Quality"
+    if score >= 0.5:
+        return "Moderate"
+    return "Accrual Risk"
 
-    def connect(self):
-        self.conn = sqlite3.connect(self.db_path)
-        return self.conn
 
-    def close(self):
-        if self.conn:
-            self.conn.close()
+def capex_label(pct):
+    if pct is None or pd.isna(pct):
+        return "Unknown"
+    if pct < 3:
+        return "Asset Light"
+    if pct <= 8:
+        return "Moderate"
+    return "Capital Intensive"
 
-    def get_cashflow_data(self):
-        """Get cash flow and financial data for all companies (using 2022 data)"""
-        query = """
-        SELECT 
-            f.company_id,
-            f.year,
-            f.free_cash_flow_cr,
-            f.cash_from_operations_cr,
-            f.operating_profit_margin_pct,
-            f.net_profit_margin_pct,
-            f.market_cap_crore,
-            f.revenue_cagr_5yr,
-            c.company_name,
-            s.broad_sector,
-            s.sub_sector,
-            cf.operating_cashflow,
-            cf.investing_cashflow,
-            cf.financing_cashflow,
-            bs.total_assets,
-            bs.total_liabilities,
-            pnl.sales,
-            pnl.net_profit as net_profit_abs
-        FROM financial_ratios f
-        JOIN companies c ON f.company_id = c.ticker
-        LEFT JOIN sectors s ON f.company_id = s.ticker
-        LEFT JOIN cashflow cf ON f.company_id = cf.company_id AND f.year = cf.year_int
-        LEFT JOIN balancesheet bs ON f.company_id = bs.company_id AND f.year = bs.year_int
-        LEFT JOIN profitandloss pnl ON f.company_id = pnl.company_id AND f.year = pnl.year_int
-        WHERE f.year = 2022
-        """
-        df = pd.read_sql(query, self.conn)
 
-        # Convert to numeric
-        numeric_cols = [
-            'free_cash_flow_cr', 'cash_from_operations_cr', 'operating_profit_margin_pct',
-            'net_profit_margin_pct', 'market_cap_crore', 'revenue_cagr_5yr',
-            'operating_cashflow', 'investing_cashflow', 'financing_cashflow',
-            'total_assets', 'total_liabilities', 'sales', 'net_profit_abs'
-        ]
-        for col in numeric_cols:
-            if col in df.columns:
-                df[col] = pd.to_numeric(df[col], errors='coerce')
+def capital_allocation_label(cfo, cfi, cff):
+    """Classify into one of 8 patterns based on sign of (CFO, CFI, CFF)."""
+    if cfo is None or cfi is None or cff is None:
+        return "Unknown"
+    if pd.isna(cfo) or pd.isna(cfi) or pd.isna(cff):
+        return "Unknown"
 
-        return df
+    signs = (
+        "+" if cfo >= 0 else "-",
+        "+" if cfi >= 0 else "-",
+        "+" if cff >= 0 else "-",
+    )
+    mapping = {
+        ("+", "-", "-"): "Reinvestor",
+        ("+", "-", "+"): "Growth Funded by Debt",
+        ("+", "+", "-"): "Divestment & Deleverage",
+        ("+", "+", "+"): "Cash Accumulator",
+        ("-", "-", "+"): "Distress Signal",
+        ("-", "+", "-"): "Turnaround",
+        ("-", "-", "-"): "Severe Distress",
+        ("-", "+", "+"): "Liquidation Mode",
+    }
+    return mapping.get(signs, "Other")
 
-    def get_historical_cashflow(self, ticker):
-        """Get historical cash flow data for a company"""
-        query = """
-        SELECT 
-            f.year,
-            f.free_cash_flow_cr,
-            f.cash_from_operations_cr,
-            f.net_profit_margin_pct,
-            cf.operating_cashflow,
-            cf.investing_cashflow,
-            cf.financing_cashflow,
-            pnl.sales
-        FROM financial_ratios f
-        LEFT JOIN cashflow cf ON f.company_id = cf.company_id AND f.year = cf.year_int
-        LEFT JOIN profitandloss pnl ON f.company_id = pnl.company_id AND f.year = pnl.year_int
-        WHERE f.company_id = ?
-        ORDER BY f.year DESC
-        """
-        df = pd.read_sql(query, self.conn, params=(ticker,))
-        return df
 
-    def calculate_cfo_quality(self, df):
-        """Calculate CFO Quality Score"""
-        if 'net_profit_abs' in df.columns:
-            df['net_profit'] = df['net_profit_abs']
-        else:
-            df['net_profit'] = df['net_profit_margin_pct'] * df['sales'] / 100
+# ==========================================================
+# Helpers
+# ==========================================================
+def _num(x):
+    if x is None:
+        return None
+    try:
+        if pd.isna(x):
+            return None
+        return float(x)
+    except Exception:
+        return None
 
-        df['cfo_pat_ratio'] = np.where(
-            df['net_profit'] > 0,
-            df['cash_from_operations_cr'] / df['net_profit'],
-            np.nan
+
+# ==========================================================
+# Main
+# ==========================================================
+def analyze_cashflow():
+    print(f"[cashflow] Reading from: {DB_PATH}")
+    conn = sqlite3.connect(str(DB_PATH))
+
+    ratios = pd.read_sql("SELECT * FROM financial_ratios", conn)
+    cf = pd.read_sql("SELECT * FROM cashflow", conn)
+    pl = pd.read_sql("SELECT * FROM profitandloss", conn)
+    sectors = pd.read_sql(
+        "SELECT ticker, broad_sector, sub_sector FROM sectors", conn)
+    companies = pd.read_sql(
+        "SELECT ticker, company_id AS numeric_id, company_name FROM companies",
+        conn)
+    conn.close()
+
+    # ==========================================================
+    # NORMALIZE company_id
+    # ==========================================================
+    # companies.numeric_id → int
+    companies["numeric_id"] = pd.to_numeric(
+        companies["numeric_id"], errors="coerce")
+    id_to_ticker = dict(zip(companies["numeric_id"], companies["ticker"]))
+
+    def resolve_company_id(x):
+        """Map int company_id → ticker; pass through strings."""
+        try:
+            n = pd.to_numeric(x, errors="coerce")
+            if pd.notna(n) and n in id_to_ticker:
+                return id_to_ticker[n]
+            return str(x).strip()
+        except Exception:
+            return str(x).strip()
+
+    cf["company_id"] = cf["company_id"].apply(resolve_company_id)
+
+    # ==========================================================
+    # NORMALIZE year (use year_int where available)
+    # ==========================================================
+    if "year_int" in cf.columns:
+        cf["year"] = pd.to_numeric(cf["year_int"], errors="coerce")
+    else:
+        cf["year"] = pd.to_numeric(cf["year"], errors="coerce")
+
+    if "year_int" in pl.columns:
+        pl["year"] = pd.to_numeric(pl["year_int"], errors="coerce")
+    else:
+        pl["year"] = pd.to_numeric(pl["year"], errors="coerce")
+
+    ratios["year"] = pd.to_numeric(ratios["year"], errors="coerce")
+
+    # ==========================================================
+    # NORMALIZE ticker strings
+    # ==========================================================
+    for df in (ratios, cf, pl):
+        df["company_id"] = df["company_id"].astype(str).str.strip()
+
+    sectors["ticker"] = sectors["ticker"].astype(str).str.strip()
+    companies["ticker"] = companies["ticker"].astype(str).str.strip()
+
+    sectors = sectors.rename(columns={"ticker": "company_id"})
+    companies = companies.rename(columns={"ticker": "company_id"})
+
+    # ==========================================================
+    # FILTER: only companies in master `companies` table
+    # (excludes 8 orphan tickers in ratios)
+    # ==========================================================
+    valid_tickers = set(companies["company_id"].dropna().unique())
+    all_ratio_tickers = set(ratios["company_id"].dropna().unique())
+    all_tickers = sorted(all_ratio_tickers & valid_tickers)
+
+    print(f"[cashflow] Master companies:     {len(valid_tickers)}")
+    print(f"[cashflow] Tickers in ratios:    {len(all_ratio_tickers)}")
+    print(f"[cashflow] Orphans filtered out: {len(all_ratio_tickers - valid_tickers)}")
+    print(f"[cashflow] Processing:           {len(all_tickers)} companies")
+
+    # ==========================================================
+    # PER-COMPANY LOOP
+    # ==========================================================
+    results = []
+
+    for cid in all_tickers:
+        r = ratios[ratios["company_id"] == cid].sort_values("year")
+        c = cf[cf["company_id"] == cid].sort_values("year")
+        p = pl[pl["company_id"] == cid].sort_values("year")
+
+        sec_row = sectors[sectors["company_id"] == cid]
+        comp_row = companies[companies["company_id"] == cid]
+
+        if r.empty:
+            continue
+
+        latest_r = r.iloc[-1]
+
+        sector = sec_row.iloc[0]["broad_sector"] if not sec_row.empty else None
+        sub_sector = sec_row.iloc[0]["sub_sector"] if not sec_row.empty else None
+        company_name = comp_row.iloc[0]["company_name"] if not comp_row.empty else cid
+
+        # ---------- CFO / PAT ratio (5-year avg) ----------
+        merged = r.merge(
+            p[["company_id", "year", "net_profit"]],
+            on=["company_id", "year"], how="left"
+        ).merge(
+            c[["company_id", "year", "operating_cashflow"]],
+            on=["company_id", "year"], how="left"
         )
-        df['cfo_pat_ratio'] = df['cfo_pat_ratio'].clip(0, 5)
 
-        def get_cfo_label(row):
-            ratio = row['cfo_pat_ratio']
-            if pd.isna(ratio):
-                return 'N/A'
-            if ratio > 1.0:
-                return 'High Quality'
-            elif ratio >= 0.5:
-                return 'Moderate'
-            else:
-                return 'Accrual Risk'
+        def _cfo_pat(row):
+            cfo = _num(row.get("operating_cashflow"))
+            pat = _num(row.get("net_profit"))
+            if cfo is not None and pat is not None and pat > 0:
+                return cfo / pat
+            return np.nan
 
-        df['cfo_quality_label'] = df.apply(get_cfo_label, axis=1)
-        df['cfo_quality_score'] = df['cfo_pat_ratio'] * 20
-        df['cfo_quality_score'] = df['cfo_quality_score'].clip(0, 100)
+        merged["cfo_pat"] = merged.apply(_cfo_pat, axis=1)
+        recent = merged["cfo_pat"].dropna().tail(5)
+        cfo_quality_score = float(recent.mean()) if not recent.empty else np.nan
+        cfo_lbl = cfo_quality_label(cfo_quality_score)
 
-        return df
+        # ---------- CapEx Intensity (latest year) ----------
+        capex_pct = None
+        if not c.empty and not p.empty:
+            latest_c = c.iloc[-1]
+            latest_p = p.iloc[-1]
+            sales = _num(latest_p.get("sales"))
+            investing = _num(latest_c.get("investing_cashflow"))
+            if sales and sales > 0 and investing is not None:
+                capex_pct = abs(investing) / sales * 100
+        capex_lbl = capex_label(capex_pct)
 
-    def calculate_capex_intensity(self, df):
-        """Calculate CapEx Intensity"""
-        df['capex_intensity_pct'] = np.where(
-            df['sales'] > 0,
-            abs(df['investing_cashflow']) / df['sales'] * 100,
-            np.nan
-        )
-        df['capex_intensity_pct'] = df['capex_intensity_pct'].clip(0, 100)
+        # ---------- Latest CFO / CFI / CFF ----------
+        cfo_val = cfi_val = cff_val = None
+        if not c.empty:
+            latest_c = c.iloc[-1]
+            cfo_val = _num(latest_c.get("operating_cashflow"))
+            cfi_val = _num(latest_c.get("investing_cashflow"))
+            cff_val = _num(latest_c.get("financing_cashflow"))
 
-        def get_capex_label(row):
-            intensity = row['capex_intensity_pct']
-            if pd.isna(intensity):
-                return 'N/A'
-            if intensity < 3:
-                return 'Asset Light'
-            elif intensity <= 8:
-                return 'Moderate'
-            else:
-                return 'Capital Intensive'
+        # ---------- Distress / Deleveraging ----------
+        distress = (cfo_val is not None and cff_val is not None and
+                    cfo_val < 0 and cff_val > 0)
+        deleveraging = (cff_val is not None and cff_val < 0)
 
-        df['capex_label'] = df.apply(get_capex_label, axis=1)
+        # ---------- FCF CAGR 5yr ----------
+        fcf_vals = [_num(x) for x in r["free_cash_flow_cr"].dropna().tolist()]
+        fcf_cagr_5yr = None
+        if len(fcf_vals) >= 6:
+            old, new = fcf_vals[-6], fcf_vals[-1]
+            if old and old > 0 and new is not None and new > 0:
+                fcf_cagr_5yr = ((new / old) ** (1 / 5) - 1) * 100
 
-        return df
+        # ---------- FCF Conversion ----------
+        latest_pat = _num(p.iloc[-1].get("net_profit")) if not p.empty else None
+        latest_fcf = _num(latest_r.get("free_cash_flow_cr"))
+        fcf_conv = None
+        if latest_pat and latest_pat > 0 and latest_fcf is not None:
+            fcf_conv = latest_fcf / latest_pat * 100
 
-    def calculate_fcf_metrics(self, df):
-        """Calculate FCF metrics"""
-        df['fcf_cagr_5yr'] = df['revenue_cagr_5yr'] if 'revenue_cagr_5yr' in df.columns else np.nan
-        df['fcf_conversion_pct'] = np.where(
-            df['sales'] > 0,
-            df['free_cash_flow_cr'] / df['sales'] * 100,
-            np.nan
-        )
+        # ---------- Capital Allocation Pattern ----------
+        cap_alloc = capital_allocation_label(cfo_val, cfi_val, cff_val)
 
-        return df
+        results.append({
+            "company_id":               cid,
+            "company_name":             company_name,
+            "sector":                   sector,
+            "sub_sector":               sub_sector,
+            "cfo_quality_score":        round(cfo_quality_score, 2) if not pd.isna(cfo_quality_score) else None,
+            "cfo_quality_label":        cfo_lbl,
+            "capex_intensity_pct":      round(capex_pct, 2) if capex_pct is not None else None,
+            "capex_label":              capex_lbl,
+            "fcf_cagr_5yr":             round(fcf_cagr_5yr, 2) if fcf_cagr_5yr is not None else None,
+            "fcf_conversion_pct":       round(fcf_conv, 2) if fcf_conv is not None else None,
+            "distress_flag":            bool(distress),
+            "deleveraging_flag":        bool(deleveraging),
+            "capital_allocation_label": cap_alloc,
+            "latest_cfo":               cfo_val,
+            "latest_cfi":               cfi_val,
+            "latest_cff":               cff_val,
+            "latest_net_profit":        latest_pat,
+            "latest_year":              int(latest_r["year"]) if pd.notna(latest_r.get("year")) else None,
+        })
 
-    def detect_distress_signal(self, df):
-        """Detect distress signals"""
-        df['distress_flag'] = np.where(
-            (df['operating_cashflow'] < 0) & (df['financing_cashflow'] > 0),
-            True,
-            False
-        )
-        return df
+    df = pd.DataFrame(results)
 
-    def detect_deleveraging(self, df):
-        """Detect deleveraging flag"""
-        df['deleveraging_flag'] = False
-        return df
+    # ==========================================================
+    # WRITE Excel (3 sheets)
+    # ==========================================================
+    xlsx_path = OUTPUT_DIR / "cashflow_intelligence.xlsx"
+    with pd.ExcelWriter(xlsx_path, engine="openpyxl") as w:
+        df.to_excel(w, sheet_name="Intelligence", index=False)
+        df[df["distress_flag"] == True].to_excel(
+            w, sheet_name="Distress", index=False)
+        df[df["deleveraging_flag"] == True].to_excel(
+            w, sheet_name="Deleveraging", index=False)
 
-    def calculate_capital_allocation(self, df):
-        """Determine capital allocation pattern"""
-        def get_capital_allocation(row):
-            cfo = row['cash_from_operations_cr']
-            fcf = row['free_cash_flow_cr']
-            capex = abs(row['investing_cashflow']) if pd.notna(row['investing_cashflow']) else 0
+    print(f"✅ Wrote {xlsx_path}")
+    print(f"   Rows: {len(df)}")
 
-            if pd.isna(cfo) or pd.isna(fcf):
-                return 'Unknown'
+    # ==========================================================
+    # WRITE Distress Alerts CSV
+    # ==========================================================
+    distress_df = df[df["distress_flag"] == True][[
+        "company_id", "company_name", "sector",
+        "latest_cfo", "latest_cff", "latest_net_profit", "latest_year"
+    ]].copy()
+    distress_path = OUTPUT_DIR / "distress_alerts.csv"
+    distress_df.to_csv(distress_path, index=False)
+    print(f"✅ Wrote {distress_path} ({len(distress_df)} rows)")
 
-            if cfo > 0 and fcf > 0 and capex > 0:
-                return 'Reinvestor'
-            elif cfo > 0 and fcf > 0 and capex < abs(cfo) * 0.1:
-                return 'Cash Machine'
-            elif cfo > 0 and fcf < 0:
-                return 'Over-Investor'
-            elif cfo < 0 and fcf < 0:
-                return 'Distress Signal'
-            elif cfo < 0 and fcf > 0:
-                return 'Asset Monetizer'
-            else:
-                return 'Balanced'
+    # ==========================================================
+    # SUMMARY
+    # ==========================================================
+    print(f"\n[cashflow] Summary:")
+    print(f"   Companies analyzed: {len(df)}")
+    print(f"   CFO Quality:  {df['cfo_quality_label'].value_counts().to_dict()}")
+    print(f"   CapEx:        {df['capex_label'].value_counts().to_dict()}")
+    print(f"   Capital Alloc: {df['capital_allocation_label'].value_counts().to_dict()}")
+    print(f"   Distress flags:     {int(df['distress_flag'].sum())}")
+    print(f"   Deleveraging flags: {int(df['deleveraging_flag'].sum())}")
+    print(f"   Unknown (CFO):  {int((df['cfo_quality_label'] == 'Unknown').sum())}")
 
-        df['capital_allocation_label'] = df.apply(get_capital_allocation, axis=1)
+    # ==========================================================
+    # PERSIST to SQLite
+    # ==========================================================
+    conn2 = sqlite3.connect(str(DB_PATH))
+    df.to_sql("cashflow_intelligence", conn2, if_exists="replace", index=False)
+    conn2.close()
+    print(f"\n✅ Persisted to DB: 'cashflow_intelligence' table")
 
-        return df
-
-    def run(self):
-        """Run full cash flow intelligence pipeline"""
-        print("=" * 60)
-        print("📊 CASH FLOW INTELLIGENCE - DAY 31")
-        print("=" * 60)
-
-        os.makedirs(OUTPUT_DIR, exist_ok=True)
-
-        # Connect
-        self.connect()
-
-        # Get data
-        df = self.get_cashflow_data()
-        print(f"✅ Loaded {len(df)} companies")
-
-        # Calculate metrics
-        df = self.calculate_cfo_quality(df)
-        df = self.calculate_capex_intensity(df)
-        df = self.calculate_fcf_metrics(df)
-        df = self.detect_distress_signal(df)
-        df = self.detect_deleveraging(df)
-        df = self.calculate_capital_allocation(df)
-
-        # Select columns for output
-        output_cols = [
-            'company_id', 'company_name', 'broad_sector', 'sub_sector',
-            'cfo_quality_score', 'cfo_quality_label',
-            'capex_intensity_pct', 'capex_label',
-            'fcf_cagr_5yr', 'fcf_conversion_pct',
-            'distress_flag', 'deleveraging_flag',
-            'capital_allocation_label'
-        ]
-
-        output_cols = [c for c in output_cols if c in df.columns]
-        df_output = df[output_cols].copy()
-
-        # Round numeric columns
-        numeric_cols = ['cfo_quality_score', 'capex_intensity_pct', 'fcf_cagr_5yr', 'fcf_conversion_pct']
-        for col in numeric_cols:
-            if col in df_output.columns:
-                df_output[col] = df_output[col].round(2)
-
-        # Save
-        excel_path = OUTPUT_DIR / "cashflow_intelligence.xlsx"
-        df_output.to_excel(excel_path, index=False)
-        print(f"✅ Saved: {excel_path}")
-
-        # Save distress alerts
-        if 'distress_flag' in df_output.columns:
-            df_distress = df_output[df_output['distress_flag'] == True]
-            csv_path = OUTPUT_DIR / "distress_alerts.csv"
-            df_distress.to_csv(csv_path, index=False)
-            print(f"✅ Saved: {csv_path}")
-
-        # Summary
-        print("\n📊 Cash Flow Intelligence Summary:")
-        print(f"   Total Companies: {len(df_output)}")
-
-        if 'cfo_quality_label' in df_output.columns:
-            print(f"   CFO Quality:")
-            print(df_output['cfo_quality_label'].value_counts())
-
-        if 'capex_label' in df_output.columns:
-            print(f"   CapEx Intensity:")
-            print(df_output['capex_label'].value_counts())
-
-        if 'capital_allocation_label' in df_output.columns:
-            print(f"   Capital Allocation:")
-            print(df_output['capital_allocation_label'].value_counts())
-
-        distress_count = df_output['distress_flag'].sum() if 'distress_flag' in df_output.columns else 0
-        print(f"   Distress Signals: {distress_count}")
-
-        self.close()
-
-        return df_output
+    return df
 
 
 if __name__ == "__main__":
-    intelligence = CashFlowIntelligence()
-    intelligence.run()
+    analyze_cashflow()

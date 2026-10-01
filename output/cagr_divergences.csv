@@ -1,0 +1,3 @@
+company_id,metric_type,parsed_value,computed_value,divergence_pct
+SBILIFE,compounded_profit_growth,6.0,7.37,18.59
+WIPRO,compounded_profit_growth,4.0,4.26,6.1

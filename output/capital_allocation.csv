@@ -1,0 +1,109 @@
+company_id,company_name,sector,latest_year,capital_allocation_pattern,operating_cashflow,investing_cashflow,financing_cashflow
+HAL,Hindustan Aeronautics Ltd,Industrials,2024,Reinvestor,8226.0,-6412.0,-1999.0
+GRASIM,Grasim Industries Ltd,Industrials,2024,Distress Signal,-10719.0,-23114.0,33908.0
+TRENT,Trent Ltd,Consumer Discretionary,2024,Reinvestor,1349.0,-508.0,-629.0
+TCS,Tata Consultancy Services Ltd,Information Technology,2024,Divestment & Deleverage,44338.0,6091.0,-48536.0
+TORNTPHARM,Torrent Pharmaceuticals Ltd,Healthcare,2024,Reinvestor,3266.0,-160.0,-2780.0
+EICHERMOT,Eicher Motors Ltd,Consumer Discretionary,2024,Reinvestor,3724.0,-2834.0,-844.0
+DRREDDY,Dr Reddys Laboratories Ltd,Healthcare,2024,Reinvestor,4543.0,-4034.0,-376.0
+HINDUNILVR,"Hindustan Unilever Ltd
+",Consumer Staples,2024,Reinvestor,15469.0,-5324.0,-10034.0
+APOLLOHOSP,"Apollo Hospitals
+Chain of Indian private hospitals",Healthcare,2024,Reinvestor,1920.0,-1537.0,-311.0
+AMBUJACEM,Ambuja Cements Ltd,Materials,2024,Growth Funded by Debt,5646.0,-8941.0,5689.0
+SIEMENS,Siemens Ltd,Industrials,2024,Reinvestor,1670.0,-502.0,-523.0
+ICICIBANK,ICICI Bank Ltd,Financials,2024,Growth Funded by Debt,157284.0,-144737.0,13765.0
+ASIANPAINT,"Asian Paints
+Indian Multi-National Paint and Coating Manufacturing Company",Materials,2024,Reinvestor,6104.0,-2548.0,-2982.0
+SHRIRAMFIN,"Shriram Finance Ltd
+",Financials,2024,Distress Signal,-31101.0,-258.0,27609.0
+SHREECEM,Shree Cement Ltd,Materials,2024,Reinvestor,3347.0,-1418.0,-1710.0
+DMART,Avenue Supermarts Ltd,Consumer Discretionary,2024,Reinvestor,2746.0,-2468.0,-148.0
+ICICIPRULI,ICICI Prudential Life Insurance Company Ltd,Financials,2024,Turnaround,-7315.0,7420.0,-88.0
+TATACONSUM,Tata Consumer Products Ltd,Consumer Staples,2024,Growth Funded by Debt,1937.0,-1911.0,256.0
+GAIL,GAIL (India) Ltd,Energy,2024,Reinvestor,12586.0,-8226.0,-3457.0
+HINDALCO,Hindalco Industries Ltd,Materials,2024,Reinvestor,24056.0,-14267.0,-10817.0
+SUNPHARMA,Sun Pharmaceuticals Industries Ltd,Healthcare,2024,Reinvestor,12135.0,-763.0,-6710.0
+HEROMOTOCO,"Hero MotoCorp Ltd
+",Consumer Discretionary,2024,Reinvestor,4923.0,-1828.0,-2717.0
+SBILIFE,SBI Life Insurance Company Ltd,Financials,2024,Reinvestor,29122.0,-31221.0,-227.0
+SBIN,State Bank of India,Financials,2024,Reinvestor,21632.0,-3476.0,-9896.0
+RECLTD,REC Ltd,Financials,2024,Distress Signal,-57723.0,-1831.0,59588.0
+AXISBANK,Axis Bank Ltd,Financials,2024,Distress Signal,-5555.0,-9001.0,22341.0
+ICICIGI,ICICI Lombard General Insurance Company Ltd,Financials,2024,Reinvestor,2407.0,-1921.0,-355.0
+DLF,DLF Ltd,Real Estate,2024,Growth Funded by Debt,2539.0,-1529.0,177.0
+INDIGO,Interglobe Aviation Ltd,Consumer Discretionary,2024,Reinvestor,21183.0,-11759.0,-9979.0
+BAJAJ-AUTO,Bajaj Auto Ltd,Consumer Discretionary,2024,Reinvestor,6558.0,-72.0,-6167.0
+RELIANCE,"Reliance Industries Ltd
+",Energy,2024,Reinvestor,158788.0,-113581.0,-16646.0
+INDUSINDBK,IndusInd Bank Ltd,Financials,2024,Severe Distress,-16843.0,-625.0,-2242.0
+ADANIPORTS,"Adani Ports & Special Economic Zone Ltd
+",Industrials,2024,Reinvestor,15018.0,-6768.0,-7800.0
+TATAPOWER,"Tata Power Company Ltd
+",Energy,2024,Reinvestor,12596.0,-9027.0,-4497.0
+ADANIPOWER,Adani Power Ltd,Energy,2024,Divestment & Deleverage,14170.0,3481.0,-16864.0
+TATAMOTORS,Tata Motors Ltd,Consumer Discretionary,2024,Reinvestor,67915.0,-22782.0,-37006.0
+POWERGRID,Power Grid Corporation of India Ltd,Energy,2024,Reinvestor,37290.0,-13114.0,-25903.0
+DIVISLAB,Divis Laboratories Ltd,Healthcare,2024,Reinvestor,1261.0,-269.0,-799.0
+DABUR,Dabur India Ltd,Consumer Staples,2024,Reinvestor,2013.0,-971.0,-1161.0
+IOC,"Indian Oil Corporation
+",Energy,2024,Reinvestor,71099.0,-31464.0,-39385.0
+INFY,Infosys Ltd,Information Technology,2024,Reinvestor,25210.0,-5093.0,-17504.0
+BAJAJHLDNG,Bajaj Holdings & Investment Ltd,Financials,2024,Reinvestor,1941.0,-472.0,-1455.0
+BAJAJFINSV,Bajaj Finserv Ltd,Financials,2024,Distress Signal,-68674.0,-10960.0,82709.0
+PNB,Punjab National Bank,Financials,2024,Distress Signal,-27939.0,-1506.0,3518.0
+PIDILITIND,Pidilite Industries Ltd,Materials,2024,Reinvestor,2724.0,-1769.0,-742.0
+PFC,Power Finance Corporation Ltd,Financials,2024,Distress Signal,-97820.0,-3409.0,101261.0
+IRCTC,Indian Railway Catering & Tourism Corporation Ltd,Consumer Discretionary,2024,Reinvestor,882.0,-215.0,-404.0
+ONGC,Oil & Natural Gas Corpn Ltd,Energy,2024,Reinvestor,99263.0,-57203.0,-45650.0
+COALINDIA,Coal India Ltd,Materials,2024,Reinvestor,18103.0,-4486.0,-13899.0
+ITC,"ITC Ltd
+",Consumer Staples,2024,Divestment & Deleverage,17179.0,1563.0,-18551.0
+NESTLEIND,Nestle India Ltd,Consumer Staples,2024,Reinvestor,4175.0,-1237.0,-3135.0
+ADANIGREEN,Adani Green Energy Ltd,Energy,2024,Growth Funded by Debt,7713.0,-21060.0,13953.0
+GODREJCP,Godrej Consumer Products Ltd,Consumer Staples,2024,Growth Funded by Debt,2070.0,-3435.0,1406.0
+HDFCLIFE,HDFC Life Insurance Company Ltd,Financials,2024,Reinvestor,10721.0,-13614.0,-403.0
+BANKBARODA,Bank of Baroda,Financials,2024,Distress Signal,-6274.0,-1285.0,5476.0
+BAJFINANCE,Bajaj Finance Ltd,Financials,2024,Distress Signal,-72760.0,-7171.0,82415.0
+NTPC,NTPC Ltd,Energy,2024,Reinvestor,40785.0,-32141.0,-8246.0
+IRFC,Indian Railway Finance Corporation Ltd,Financials,2024,Reinvestor,7914.0,-8.0,-8046.0
+CIPLA,"Cipla Ltd
+",Healthcare,2024,Reinvestor,4134.0,-2982.0,-1200.0
+JIOFIN,Jio Financial Services Ltd,Financials,2024,Turnaround,-678.0,1441.0,-753.0
+JINDALSTEL,Jindal Steel & Power Ltd,Materials,2024,Growth Funded by Debt,6008.0,-8344.0,1381.0
+BEL,Bharat Electronics Ltd,Industrials,2024,Reinvestor,4659.0,-5924.0,-1475.0
+NHPC,"NHPC Ltd
+",Energy,2024,Reinvestor,6938.0,-5968.0,-581.0
+BHARTIARTL,Bharti Airtel Ltd,Communication Services,2024,Reinvestor,78898.0,-51089.0,-27778.0
+NAUKRI,Info Edge (India) Ltd,Communication Services,2024,Growth Funded by Debt,702.0,-852.0,120.0
+HAVELLS,Havells India Ltd,Industrials,2024,Reinvestor,1953.0,-1618.0,-534.0
+HDFCBANK,HDFC Bank Ltd,Financials,2024,Divestment & Deleverage,19069.0,16600.0,-3983.0
+HCLTECH,HCL Technologies Ltd,Information Technology,2024,Reinvestor,22448.0,-6608.0,-15464.0
+TATASTEEL,"Tata Steel Ltd
+",Materials,2024,Reinvestor,20301.0,-14253.0,-11097.0
+CHOLAFIN,Cholamandalam Investment & Finance Company Ltd,Financials,2024,Distress Signal,-35683.0,-2855.0,38471.0
+CANBK,Canara Bank,Financials,2024,Reinvestor,15046.0,-1750.0,-3834.0
+JSWENERGY,JSW Energy Ltd,Energy,2024,Growth Funded by Debt,6234.0,-8197.0,1675.0
+M&M,"Mahindra & Mahindra Ltd
+",Consumer Discretionary,2024,Distress Signal,-5630.0,-5615.0,12281.0
+MOTHERSON,Samvardhana Motherson International Ltd,Consumer Discretionary,2024,Growth Funded by Debt,7569.0,-6644.0,1281.0
+JSWSTEEL,JSW Steel Ltd,Materials,2024,Reinvestor,12078.0,-14467.0,-5005.0
+BOSCHLTD,Bosch Ltd,Consumer Discretionary,2024,Divestment & Deleverage,1253.0,283.0,-1452.0
+BHEL,"Bharat Heavy Electricals Limited
+",Industrials,2024,Liquidation Mode,-3713.0,1331.0,2656.0
+MARUTI,Maruti Suzuki India Ltd,Consumer Discretionary,2024,Reinvestor,16801.0,-11865.0,-4062.0
+BPCL,Bharat Petroleum Corporation Ltd,Energy,2024,Reinvestor,35936.0,-10521.0,-25427.0
+LTIM,LTIMindtree Ltd,Information Technology,2024,Reinvestor,5670.0,-3918.0,-2269.0
+LODHA,Macrotech Developers Ltd,Real Estate,2024,Growth Funded by Debt,2512.0,-2947.0,951.0
+ADANIENSOL,Adani Energy Solutions Ltd,Energy,2024,Reinvestor,6038.0,-4943.0,-543.0
+TITAN,"Titan Company Ltd
+",Consumer Discretionary,2024,Reinvestor,1695.0,-189.0,-1329.0
+ADANIENT,Adani Enterprises Ltd,Industrials,2024,Growth Funded by Debt,10312.0,-18767.0,8879.0
+TECHM,Tech Mahindra Ltd,Information Technology,2024,Reinvestor,6376.0,-1318.0,-4767.0
+LICI,Life Insurance Corporation of India,Financials,2024,Reinvestor,26122.0,-25269.0,-4427.0
+KOTAKBANK,"Kotak Mahindra Bank Ltd
+",Financials,2024,Growth Funded by Debt,15685.0,-8919.0,15515.0
+BRITANNIA,Britannia Industries Ltd,Consumer Staples,2024,Divestment & Deleverage,2573.0,477.0,-2830.0
+LT,Larsen & Toubro Ltd,Industrials,2024,Divestment & Deleverage,18266.0,2179.0,-25413.0
+TVSMOTOR,TVS Motor Company Ltd,Consumer Discretionary,2024,Distress Signal,-1253.0,-1001.0,2759.0
+ABB,Abbott India Ltd,Industrials,2024,Reinvestor,6038.0,-4943.0,-543.0

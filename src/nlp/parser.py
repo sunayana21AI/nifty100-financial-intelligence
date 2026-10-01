@@ -1,234 +1,201 @@
 """
 src/nlp/parser.py
-Analysis Text Parser - Extracts structured data from analysis.xlsx
-"""
+Parse analysis.xlsx text fields using regex to extract CAGR values.
 
-import pandas as pd
+File structure (IMPORTANT):
+  Row 0: Title row  ("Bluestock Fintech — Nifty 100 | Analysis | 20 records")
+  Row 1: Actual header  (id, company_id, compounded_sales_growth, ...)
+  Row 2+: Data
+
+So we use skiprows=1 to skip the title row.
+
+Target: fields like "10 Years: 21%" → period=10, value=21.0
+Also handles: "5 Years       24%", "10Years: 22%", "10 Years:     15%"
+"""
 import re
 import sqlite3
 from pathlib import Path
-import os
 
-DB_PATH = "nifty100.db"
-RAW_DIR = Path("data/raw")
-ANALYSIS_FILE = RAW_DIR / "analysis.xlsx"
-OUTPUT_DIR = Path("output")
+import pandas as pd
+
+# ---------- Paths ----------
+ROOT = Path(__file__).resolve().parents[2]
+DATA_PATH = ROOT / "data" / "raw" / "analysis.xlsx"
+DB_PATH = ROOT / "nifty100.db"
+OUTPUT_DIR = ROOT / "output"
+OUTPUT_DIR.mkdir(exist_ok=True)
+
+# ---------- Regex ----------
+# Handles: "10 Years: 21%", "10Years: 22%", "5 Years       24%",
+#          "10 Years:     15%", "5 Years          14%"
+PATTERN = re.compile(r"(\d+)\s*Years?\s*:?\s*([\d.]+)\s*%")
+
+# Fields to parse from the analysis file
+TARGET_FIELDS = [
+    "compounded_sales_growth",
+    "compounded_profit_growth",
+    "stock_price_cagr",
+    "roe",
+]
 
 
-class AnalysisParser:
-    def __init__(self):
-        self.conn = None
-        self.pattern = re.compile(r'(\d+)\s*Years?:?\s*([\d.]+)%')
-        
-    def connect(self):
-        self.conn = sqlite3.connect(DB_PATH)
-        return self.conn
-    
-    def load_analysis_data(self):
-        """Load analysis.xlsx with correct parsing"""
-        if not ANALYSIS_FILE.exists():
-            print(f"❌ Analysis file not found: {ANALYSIS_FILE}")
-            return None
-        
-        try:
-            # Read with header=1 (second row as header)
-            df = pd.read_excel(ANALYSIS_FILE, header=1)
-            
-            # Clean column names
-            df.columns = df.columns.str.lower().str.strip()
-            df.columns = df.columns.str.replace(' ', '_')
-            
-            print(f"✅ Loaded analysis data: {len(df)} rows")
-            print(f"   Columns: {df.columns.tolist()}")
-            print(f"\nSample data:")
-            print(df.head(10))
-            
-            return df
-            
-        except Exception as e:
-            print(f"❌ Error loading analysis file: {e}")
-            return None
-    
-    def parse_text_field(self, text, metric_type):
-        """Parse text field using regex pattern"""
-        if pd.isna(text) or not isinstance(text, str):
-            return None
-        
-        matches = self.pattern.findall(text)
-        results = []
-        for match in matches:
-            period = int(match[0])
-            value = float(match[1])
-            results.append({
-                'metric_type': metric_type,
-                'period_years': period,
-                'value_pct': value
-            })
-        return results
-    
-    def parse_all_texts(self, df):
-        """Parse all text fields in analysis.xlsx"""
-        results = []
-        failures = []
-        
-        # Define fields to parse
-        text_fields = [
-            'compounded_sales_growth',
-            'compounded_profit_growth',
-            'stock_price_cagr',
-            'roe'
-        ]
-        
-        for idx, row in df.iterrows():
-            # Get company_id
-            company_id = row.get('company_id')
-            if pd.isna(company_id):
+def parse_analysis_text() -> pd.DataFrame:
+    """Parse analysis.xlsx and extract CAGR values."""
+    print(f"[parser] Reading: {DATA_PATH}")
+
+    if not DATA_PATH.exists():
+        print(f"❌ File not found: {DATA_PATH}")
+        return pd.DataFrame()
+
+    # 🔥 KEY FIX: skiprows=1 to skip the title row
+    df = pd.read_excel(DATA_PATH, skiprows=1)
+
+    # Clean column names (strip whitespace)
+    df.columns = [str(c).strip() for c in df.columns]
+
+    print(f"[parser] Columns found: {df.columns.tolist()}")
+    print(f"[parser] Rows loaded: {len(df)}")
+
+    parsed_rows = []
+    failed_rows = []
+
+    for _, row in df.iterrows():
+        company_id = row.get("company_id") or row.get("ticker")
+        if pd.isna(company_id):
+            continue
+        company_id = str(company_id).strip()
+
+        for field in TARGET_FIELDS:
+            if field not in df.columns:
                 continue
-            
-            # Parse each text column
-            for field in text_fields:
-                if field not in df.columns:
-                    continue
-                    
-                text = row.get(field)
-                if pd.isna(text):
-                    continue
-                
-                parsed = self.parse_text_field(str(text), field)
-                if parsed:
-                    for p in parsed:
-                        results.append({
-                            'company_id': str(company_id).strip(),
-                            'metric_type': p['metric_type'],
-                            'period_years': p['period_years'],
-                            'value_pct': p['value_pct']
-                        })
-                else:
-                    failures.append({
-                        'company_id': str(company_id).strip(),
-                        'field': field,
-                        'text': str(text)[:100]
+            if pd.isna(row[field]):
+                continue
+
+            text = str(row[field]).strip()
+            matches = PATTERN.findall(text)
+
+            if matches:
+                for period, value in matches:
+                    parsed_rows.append({
+                        "company_id": company_id,
+                        "metric_type": field,
+                        "period_years": int(period),
+                        "value_pct": float(value),
                     })
-        
-        df_results = pd.DataFrame(results)
-        df_failures = pd.DataFrame(failures)
-        
-        print(f"\n✅ Parsed {len(results)} entries")
-        print(f"⚠️ {len(failures)} parsing failures")
-        
-        return df_results, df_failures
-    
-    def cross_validate_cagr(self, df_parsed):
-        """Cross-validate parsed CAGR against computed CAGR from database"""
-        if df_parsed.empty:
-            print("⚠️ No parsed data to validate")
-            return df_parsed, pd.DataFrame()
-        
-        self.connect()
-        
-        # Get computed CAGR from financial_ratios
-        query = """
-        SELECT 
-            company_id,
-            revenue_cagr_5yr as computed_sales_cagr,
-            pat_cagr_5yr as computed_profit_cagr
+            else:
+                failed_rows.append({
+                    "company_id": company_id,
+                    "metric_type": field,
+                    "raw_text": text,
+                })
+
+    parsed_df = pd.DataFrame(
+        parsed_rows,
+        columns=["company_id", "metric_type", "period_years", "value_pct"],
+    )
+    failures_df = pd.DataFrame(
+        failed_rows,
+        columns=["company_id", "metric_type", "raw_text"],
+    )
+
+    # Always write CSVs (even if empty, with headers — prevents EmptyDataError)
+    parsed_df.to_csv(OUTPUT_DIR / "analysis_parsed.csv", index=False)
+    failures_df.to_csv(OUTPUT_DIR / "parse_failures.csv", index=False)
+
+    print(f"✅ Parsed {len(parsed_df)} values")
+    print(f"⚠️  Failed to parse {len(failures_df)} entries")
+
+    if not parsed_df.empty:
+        print(f"\n[parser] Sample parsed values:")
+        print(parsed_df.head(10).to_string(index=False))
+
+    if not failures_df.empty:
+        print(f"\n[parser] Sample failures:")
+        print(failures_df.head(5).to_string(index=False))
+
+    return parsed_df
+
+
+def cross_validate_cagr() -> list[dict]:
+    """Compare parsed CAGR vs computed CAGR — flag divergence > 5%."""
+    parsed_path = OUTPUT_DIR / "analysis_parsed.csv"
+
+    if not parsed_path.exists() or parsed_path.stat().st_size < 10:
+        print("⚠️  No parsed data — skipping cross-validation")
+        return []
+
+    parsed = pd.read_csv(parsed_path)
+
+    if parsed.empty:
+        print("⚠️  Parsed CSV is empty — skipping cross-validation")
+        return []
+
+    conn = sqlite3.connect(str(DB_PATH))
+    computed = pd.read_sql("""
+        SELECT company_id, revenue_cagr_5yr, pat_cagr_5yr, eps_cagr_5yr
         FROM financial_ratios
         WHERE year = (SELECT MAX(year) FROM financial_ratios)
-        """
-        df_computed = pd.read_sql(query, self.conn)
-        self.close()
-        
-        # Merge with parsed data
-        df_merged = df_parsed.merge(
-            df_computed,
-            left_on='company_id',
-            right_on='company_id',
-            how='left'
-        )
-        
-        # Flag divergences > 5%
-        def check_divergence(row):
-            metric = row['metric_type']
-            parsed = row['value_pct']
-            
-            if metric == 'compounded_sales_growth':
-                computed = row.get('computed_sales_cagr')
-            elif metric == 'compounded_profit_growth':
-                computed = row.get('computed_profit_cagr')
-            else:
-                return 'N/A'
-            
-            if pd.isna(computed):
-                return 'No computed data'
-            
-            diff = abs(parsed - computed)
-            if diff > 5:
-                return f'Divergence: {diff:.1f}%'
-            return 'Match'
-        
-        df_merged['validation_status'] = df_merged.apply(check_divergence, axis=1)
-        
-        # Filter divergences
-        df_divergences = df_merged[df_merged['validation_status'] != 'Match']
-        
-        print(f"\n📊 Cross-validation results:")
-        print(f"   Total parsed entries: {len(df_merged)}")
-        print(f"   Divergences > 5%: {len(df_divergences)}")
-        
-        return df_merged, df_divergences
-    
-    def run(self):
-        """Run full parsing pipeline"""
-        print("="*60)
-        print("📊 ANALYSIS TEXT PARSER - DAY 29")
-        print("="*60)
-        
-        os.makedirs(OUTPUT_DIR, exist_ok=True)
-        
-        # Load data
-        df = self.load_analysis_data()
-        if df is None or df.empty:
-            print("❌ No data loaded")
-            return None
-        
-        # Parse texts
-        df_parsed, df_failures = self.parse_all_texts(df)
-        
-        # Save parsed data
-        parsed_path = OUTPUT_DIR / "analysis_parsed.csv"
-        df_parsed.to_csv(parsed_path, index=False)
-        print(f"✅ Saved: {parsed_path}")
-        
-        # Save failures
-        if not df_failures.empty:
-            failures_path = OUTPUT_DIR / "parse_failures.csv"
-            df_failures.to_csv(failures_path, index=False)
-            print(f"✅ Saved: {failures_path}")
-        
-        # Cross-validate
-        if not df_parsed.empty:
-            df_validated, df_divergences = self.cross_validate_cagr(df_parsed)
-            
-            # Save validation results
-            validated_path = OUTPUT_DIR / "parsed_cagr_validated.csv"
-            df_validated.to_csv(validated_path, index=False)
-            print(f"✅ Saved: {validated_path}")
-            
-            if not df_divergences.empty:
-                divergences_path = OUTPUT_DIR / "cagr_divergences.csv"
-                df_divergences.to_csv(divergences_path, index=False)
-                print(f"✅ Saved: {divergences_path}")
-        else:
-            print("⚠️ No parsed data to validate")
-        
-        print("\n✅ Parsing complete!")
-        return df_parsed
-    
-    def close(self):
-        if self.conn:
-            self.conn.close()
+    """, conn)
+    conn.close()
+
+    # Map analysis field → DB column
+    metric_map = {
+        "compounded_sales_growth":  "revenue_cagr_5yr",
+        "compounded_profit_growth": "pat_cagr_5yr",
+    }
+
+    divergences = []
+    for _, p in parsed.iterrows():
+        # Only compare 5-year CAGRs (matches DB columns)
+        if p["period_years"] != 5:
+            continue
+
+        metric = metric_map.get(p["metric_type"])
+        if not metric:
+            continue
+
+        c = computed[computed["company_id"] == p["company_id"]]
+        if c.empty:
+            continue
+
+        computed_val = c.iloc[0][metric]
+        if pd.isna(computed_val):
+            continue
+
+        # Divergence as % of computed value
+        denom = max(abs(computed_val), 1.0)
+        diff_pct = abs(p["value_pct"] - computed_val) / denom * 100
+
+        if diff_pct > 5:
+            divergences.append({
+                "company_id": p["company_id"],
+                "metric_type": p["metric_type"],
+                "parsed_value": round(p["value_pct"], 2),
+                "computed_value": round(float(computed_val), 2),
+                "divergence_pct": round(diff_pct, 2),
+            })
+
+    div_df = pd.DataFrame(
+        divergences,
+        columns=["company_id", "metric_type", "parsed_value",
+                 "computed_value", "divergence_pct"],
+    )
+    div_df.to_csv(OUTPUT_DIR / "cagr_divergences.csv", index=False)
+
+    print(f"\n⚠️  Found {len(div_df)} divergences > 5%")
+    if not div_df.empty:
+        print(div_df.to_string(index=False))
+
+    return divergences
+
+
+def main():
+    parsed = parse_analysis_text()
+    if not parsed.empty:
+        cross_validate_cagr()
+    else:
+        print("\n⚠️  No values parsed — skipping cross-validation")
 
 
 if __name__ == "__main__":
-    parser = AnalysisParser()
-    parser.run()
+    main()
