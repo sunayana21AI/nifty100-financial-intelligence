@@ -125,3 +125,22 @@ scripts/debug/
 reports/portfolio/
 reports/tearsheets/
 reports/sector/
+# Sprint 6 debug scripts
+scripts/debug/
+
+# Empty/placeholder DB
+db/*.db
+
+# Output intermediate CSVs
+output/all_53_roe_gt_15_companies.csv
+output/failed_tearsheets.csv
+output/load_audit.csv
+output/nifty100_screener_results.csv
+output/parsed_cagr_validated.csv
+output/validation_failures.csv
+
+# Guide builder script
+docs/build_guide.ps1
+
+# Main DB (untracked since Sprint 5)
+nifty100.db
